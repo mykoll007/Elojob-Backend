@@ -1,0 +1,120 @@
+@media screen and (max-width: 1000px){
+    /*Header*/
+    header{
+        display: block;
+        padding-left: 102px;
+    }
+    header ul{
+        display: block;
+    }
+    nav{
+        padding-top: 0;
+    }
+     header li{
+        width: 100px;
+    }
+    #itens{
+        display: none;
+    }
+    #btnIniciar{
+        display: none;
+        margin-top: 123px;
+        margin-bottom: 10px;
+    }
+    #IconMenu{
+        color: white;
+        height: 35px;
+        margin-top: 45px;
+        font-size: 41px;
+        display: block;
+        cursor: pointer;
+    }
+    #align-logoHambu{
+        display: flex;
+    justify-content: space-between;
+    margin-right: 171px;
+    }
+
+    /*Footer*/
+
+    .container-footer{
+        display: block;
+        text-align: center;
+    }
+    #content-footer1{
+        display: block;
+    }
+    #content-footer1 p {
+        width: 100%;
+        margin: 2px;
+        font-size: 14px;
+    }
+    #align-icons {
+        width: 100%;
+        justify-content: center;
+    }
+    footer ul{
+        width: 100%;
+        margin-right: 0;
+        margin-top: 11px;
+    }
+    #formaspag{
+        width: 100%;
+        margin-top: 28px;
+    }
+    #formaspag p{
+        display: none;    
+    }
+    #icone-forma{
+        margin-right: 17px;
+    }
+}
+
+
+
+    /*------------------index.html----------------------------------*/
+
+    @media screen and (max-width: 1000px) {
+       .vantagens {
+        background: none;
+        height: auto;
+       } 
+    }
+    @media screen and (max-width: 767px){
+        header{
+            padding-left: 44px;
+        }
+        #align-logoHambu{
+            margin-right: 110px;
+        }
+    }
+    @media screen and (max-width: 547px){
+        #align-chamada{
+            display: block;
+            text-align: center;
+        }
+        #container-infos{
+            display: block;
+        }
+        #container-infos button{
+            margin: 22px 0;
+        }
+        .button-link{
+            margin: 14px;
+        }
+    }
+    @media screen and (max-width: 385px){
+    .hero p{
+        margin-top: 0;
+    }
+    }
+
+    /*------------------elojob.html----------------------------------*/
+    @media screen and (max-width: 450px){
+        #align-planos{
+        margin-left: 32px;
+        margin-right: 32px;
+        }
+    }
+
+
