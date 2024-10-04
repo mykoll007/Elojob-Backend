@@ -393,7 +393,7 @@ h4 {
   margin-top: 30px;
 }
 #modalIniciar{
-  display: flex;
+  display: none;
   justify-content: center;
   /* position: fixed;  */
   z-index: 1000; 
@@ -404,7 +404,18 @@ h4 {
   background-color: rgba(0, 0, 0, 0.5);
 }
 #modalRegistrar{
-  display: flex;
+  display: none;
+  justify-content: center;
+  /* position: fixed;  */
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#modalRecuperarSenha{
+  display: none;
   justify-content: center;
   /* position: fixed;  */
   z-index: 1000; 
@@ -421,10 +432,11 @@ h4 {
   margin-right: 22px;
   text-align: end;
   height: 19px;
+  cursor: pointer;
 }
 
 #modal-content1{
-  background-color: blue;
+  background-color: black;
   margin: auto; 
   border: 1px solid white;
   border-radius: 16px;
@@ -433,7 +445,7 @@ h4 {
   padding-bottom: 10px;
 }
 #modal-content2{
-  background-color: blue;
+  background-color: black;
   margin: auto; 
   border: 1px solid white;
   border-radius: 16px;

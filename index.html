@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/keyframes.css">
 
-    <link rel="icon" href="assets/images/logoCronos.png">
+        <!--Icon baixada gratuitamente pela Flaticon-->
+        <link rel="icon" href="assets/images/gladiador.png">
 
     <meta name="description"
         content="EloJob XCrONOS oferece serviços de elo boosting, Duo Boost, MD5 e Coaching para League of Legends. Melhore seu desempenho com profissionais experientes.">
@@ -43,7 +44,7 @@
     <header>
         <div id="align-logoHambu">
             <a href="index.html"><img src="assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-            <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
+            <span id="IconMenu" class="material-symbols-outlined" >
                 menu
             </span>
         </div>
@@ -57,7 +58,7 @@
                 <li><a href="pages/eventos.html">EVENTOS</a></li>
             </ul>
         </nav>
-        <a href="#" class="login-btn" id="btnIniciar">
+        <a href="#" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
             INICIAR SESSÃO
         </a>
     </header>
@@ -392,7 +393,7 @@
                     </div>
                 </form>
                 <p class="register-text">Ainda não tem uma conta? <a href="#">Cadastre-se</a></p>
-                <p class="register-text">Esqueceu a senha?</p>
+                <p class="register-text" id="esqueceu-senha"><a href="#">Esqueceu a senha?</a></p>
             </div>
         </div>
 
