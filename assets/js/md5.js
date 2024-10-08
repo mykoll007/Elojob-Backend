@@ -23,14 +23,15 @@ const maxPartidas = 5; // Número máximo de partidas
 
 // Objeto que define o preço por partida para cada liga
 const precosPorLiga = {
-    ferro: 10,
-    bronze: 20,
-    prata: 30,
-    ouro: 40,
-    platina: 50,
-    esmeralda: 60,
-    diamante: 70,
-    mestre: 80
+    unraked: 6,
+    ferro: 4,
+    bronze: 4,
+    prata: 5,
+    ouro: 6,
+    platina: 8,
+    esmeralda: 9,
+    diamante: 11,
+    mestre: 18
 };
 
 let ligaAtual = 'prata'; // Liga inicial
