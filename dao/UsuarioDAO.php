@@ -35,7 +35,7 @@ class UsuarioDAO{
     public function getByEmail($email)
     {
         try {
-            $sql = "SELECT * FROM usuarios WHERE Email = :email";
+            $sql = "SELECT * FROM usuarios WHERE email = :email";
             $stmt = $this->db->prepare($sql);
 
             $stmt->execute([':email' => $email]);
@@ -49,7 +49,7 @@ class UsuarioDAO{
     public function updateToken($id, $token)
     {
         try {
-            $sql = "UPDATE usuarios SET token = :token WHERE id = :id";
+            $sql = "UPDATE usuarios SET token = :token WHERE id_cadastro = :id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':id' => $id, ':token' => $token]);
 

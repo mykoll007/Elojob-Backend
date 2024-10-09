@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,8 +16,8 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/keyframes.css">
 
-        <!--Icon baixada gratuitamente pela Flaticon-->
-        <link rel="icon" href="assets/images/gladiador.png">
+    <!--Icon baixada gratuitamente pela Flaticon-->
+    <link rel="icon" href="assets/images/gladiador.png">
 
     <meta name="description"
         content="EloJob XCrONOS oferece serviços de elo boosting, Duo Boost, MD5 e Coaching para League of Legends. Melhore seu desempenho com profissionais experientes.">
@@ -44,7 +49,7 @@
     <header>
         <div id="align-logoHambu">
             <a href="index.html"><img src="assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-            <span id="IconMenu" class="material-symbols-outlined" >
+            <span id="IconMenu" class="material-symbols-outlined">
                 menu
             </span>
         </div>
@@ -56,16 +61,65 @@
                 <li><a href="pages/md5.html">MD5</a></li>
                 <li><a href="pages/coach.html">COACH</a></li>
                 <li><a href="pages/eventos.html">EVENTOS</a></li>
+
+                <?php if(isset($_SESSION['token'])) : ?>
+                <div class="itens-logado">   
+                <li><a href="pages/eventos.html">Meus Pedidos</a></li>
+                <li><a href="pages/eventos.html">Alterar dados</a></li>
+                <li>
+                    <form action="../elojob-backend/service/AuthService.php" method="post" style="display: inline;">
+                        <input type="hidden" name="type" value="logout">
+                        <button type="submit">
+                            Sair
+                        </button>
+                    </form>
+                </li>
+                <div>
+                <?php endif; ?>
             </ul>
         </nav>
-        <a href="#" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
+        <?php if(isset($_SESSION['token'])) : ?>
+        <div class="avatar">
+            <img src="assets/images/usuario.png" alt="icone usuario">
+        </div>
+
+        <!--Parte Usuario-->
+        <div class="content-usuario">
+            <img src="assets/images/usuario.png" alt="icone usuario">
+            <h4>Mykoll Daniel</h4>
+            <p class="email">mykoll.daniel@gmail.com</p>
+            <div class="align-itensUsuario">
+                <img src="assets/images/carrinho.png" alt="icone carrinho de pedidos">
+                <a href="pages/eventos.html">
+                    <p>Meus Pedidos</p>
+                </a>
+            </div>
+            <div class="align-itensUsuario">
+                <img src="assets/images/Database.png" alt="icone carrinho de pedidos">
+                <a href="pages/eventos.html">
+                    <p>Alterar dados</p>
+                </a>
+            </div>
+
+            <form action="../elojob-backend/service/AuthService.php" method="post">
+                <input type="hidden" name="type" value="logout">
+                <button class="align-itensUsuario" id="logout" type="submit">
+                    <img src="assets/images/Logout.png" alt="ícone de logout">
+                    Sair
+                </button>
+            </form>
+        </div>
+
+        <?php else : ?>
+        <a href="index.php" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
             INICIAR SESSÃO
         </a>
+        <?php endif; ?>
     </header>
     <main>
 
-        <!--Introdução-->
 
+        <!--Conteúdo-->
         <section class="hero">
 
             <h1>ASCENDA AO TOPO COM A ELOJOB XCrONOS!</h1>
@@ -381,7 +435,7 @@
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>INICIAR SESSÃO</h2>
                 <form action="../elojob-backend/service/AuthService.php" method="post">
-                <input type="hidden" name="type" value="login">
+                    <input type="hidden" name="type" value="login">
 
                     <label for="email">Username</label>
                     <input type="text" id="email" name="email" required>
@@ -390,7 +444,7 @@
                     <input type="password" id="login-password" name="password" required>
 
                     <div class="align-btn">
-                    <button type="submit">INICIAR SESSÃO</button>
+                        <button type="submit">INICIAR SESSÃO</button>
                     </div>
                 </form>
                 <p class="register-text">Ainda não tem uma conta? <a href="#">Cadastre-se</a></p>
@@ -407,7 +461,7 @@
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>CADASTRE-SE</h2>
                 <form action="../elojob-backend/service/AuthService.php" method="post">
-                <input type="hidden" name="type" value="register">
+                    <input type="hidden" name="type" value="register">
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" required>
 
@@ -421,10 +475,12 @@
                     <input type="password" id="confirm-password" name="confirm-password" required>
 
                     <div class="align-btn">
-                    <button type="submit">CADASTRAR</button>
+                        <button type="submit">CADASTRAR</button>
                     </div>
                 </form>
-                <p class="register-text">Cadastrar significa que você concorda com os <a href="pages/termos-de-uso.html" target="_blank">Termos de Uso</a> e <a href="pages/politica-privacidade.html" target="_blank">Politíca de Privacidade</a></p>
+                <p class="register-text">Cadastrar significa que você concorda com os <a href="pages/termos-de-uso.html"
+                        target="_blank">Termos de Uso</a> e <a href="pages/politica-privacidade.html"
+                        target="_blank">Politíca de Privacidade</a></p>
             </div>
         </div>
 
@@ -442,10 +498,10 @@
 
 
                     <div class="align-btn">
-                    <button type="submit">ENVIAR CÓDIGO</button>
+                        <button type="submit">ENVIAR CÓDIGO</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
 
@@ -491,6 +547,12 @@
     <script src="assets/js/global.js"></script>
     <script src="assets/js/particles.min.js"></script>
     <script src="assets/js/index.js"></script>
+    <script>
+        // Função para adicionar a classe #itens.active na responsive.css para cobrir os itens quando logado 
+    document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('itens').classList.toggle('active', <?php echo isset($_SESSION['token']) ? 'true' : 'false'; ?>);});
+    </script>
+
 
 </body>
 

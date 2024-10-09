@@ -9,6 +9,8 @@ main {
   background-position-y: bottom;
   background-repeat: no-repeat;
   margin-bottom: 64px;
+  padding-top: 1px;
+
 }
 
 h1 {
