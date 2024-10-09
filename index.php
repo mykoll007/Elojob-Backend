@@ -405,8 +405,8 @@
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>CADASTRE-SE</h2>
-                <form action="" method="post">
-
+                <form action="../elojob-backend/service/AuthService.php" method="post">
+                <input type="hidden" name="type" value="register">
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" required>
 
@@ -414,7 +414,10 @@
                     <input type="email" id="email" name="email" required>
 
                     <label for="register-password">Senha</label>
-                    <input type="password" id="register-password" name="password" required>
+                    <input type="password" id="register-password" name="register-password" required>
+
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
 
                     <div class="align-btn">
                     <button type="submit">CADASTRAR</button>
