@@ -40,7 +40,7 @@ class UsuarioDAO{
 
             $stmt->execute([':email' => $email]);
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $usuario ? new Usuario($usuario['id'], $usuario['nome'], $usuario['senha'], $usuario['email'], $usuario['token']) : null;
+            return $usuario ? new Usuario($usuario['id_cadastro'], $usuario['nome'], $usuario['senha'], $usuario['email'], $usuario['token'], $usuario['data_cadastro']) : null;
         } catch (PDOException $e) {
             return null;
         }

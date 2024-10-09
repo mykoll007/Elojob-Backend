@@ -171,15 +171,15 @@ closeButtons.forEach(button => {
   button.addEventListener('click', closeModals);
 });
 
-// Fechar modais ao clicar fora deles
-window.addEventListener('click', (event) => {
-  if (event.target === modalIniciar) {
-    closeModals();
-  }
-  if (event.target === document.getElementById('modalRegistrar')) {
-    closeModals();
-  }
-  if (event.target === document.getElementById('modalRecuperarSenha')) {
-    closeModals();
-  }
-});
+// // Fechar modais ao clicar fora deles
+// window.addEventListener('click', (event) => {
+//   if (event.target === modalIniciar) {
+//     closeModals();
+//   }
+//   if (event.target === document.getElementById('modalRegistrar')) {
+//     closeModals();
+//   }
+//   if (event.target === document.getElementById('modalRecuperarSenha')) {
+//     closeModals();
+//   }
+// });

@@ -23,6 +23,8 @@ switch($type)
         break;
 }
 
+
+
 function handlerRegistration()
 {
     // Receber os dados vindos por input do HTML
@@ -44,6 +46,7 @@ function handlerRegistration()
 
     // Etapa de segurança: criação da senha segura e geração do token
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
     $token = bin2hex(random_bytes(25));
 
     // Definir a data de cadastro
@@ -82,11 +85,13 @@ function handleLogin()
     $usuarioDAO = new UsuarioDAO();
     $usuario = $usuarioDAO->getByEmail($email);
 
-    if(!$usuario || !password_verify($senha, $usuario->getSenha()))
-    {
-        echo "Email ou senha inválidos!";
-        return;
-    }
+
+   // Verifica se o usuário existe e se a senha informada confere com o hash armazenado
+   if (!$usuario || !password_verify($senha, $usuario->getSenha())) {
+    echo "Email ou senha inválidos!";
+    return;
+}
+
 
     // Geração de novo token e atualização do token no banco de dados
     $token = bin2hex(random_bytes(25));

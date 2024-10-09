@@ -380,10 +380,11 @@
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>INICIAR SESSÃO</h2>
-                <form action="" method="post">
+                <form action="../elojob-backend/service/AuthService.php" method="post">
+                <input type="hidden" name="type" value="login">
 
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="email">Username</label>
+                    <input type="text" id="email" name="email" required>
 
                     <label for="login-password">Senha</label>
                     <input type="password" id="login-password" name="password" required>

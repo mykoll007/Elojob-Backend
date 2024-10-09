@@ -3,7 +3,7 @@
 //Criar a classe
 class Usuario 
 {
-    //Criar proriedades existentes na entidade do Banco de Dados
+    // Criar propriedades existentes na entidade do Banco de Dados
     private $id;
     private $nome;
     private $senha;
@@ -11,8 +11,7 @@ class Usuario
     private $token;
     private $data_cadastro;
 
-
-    //Criar método construtor com as propriedaes obrigatórias a um usuário
+    // Criar método construtor com as propriedades obrigatórias a um usuário
     public function __construct($id, $nome, $senha, $email, $token, $data_cadastro)
     {
         $this->id = $id;
@@ -23,7 +22,7 @@ class Usuario
         $this->data_cadastro = $data_cadastro;     
     }
 
-    //Criar getters e setters
+    // Criar getters
     public function getId() {
         return $this->id;
     }
@@ -44,29 +43,31 @@ class Usuario
         return $this->token;
     }
 
-    public function getData(){
+    public function getData() {
         return $this->data_cadastro;
     }
 
+    // Criar setters
     public function setNome($nome) {
-        $nome = $nome;
+        $this->nome = $nome; // Corrigido para usar $this->nome
     }
 
     public function setSenha($senha) {
-        $senha = $senha;
+        $this->senha = $senha; // Corrigido para usar $this->senha
     }
 
     public function setEmail($email) {
-        $email = $email;
+        $this->email = $email; // Corrigido para usar $this->email
     }
 
     public function setToken($token) {
-        $token = $token;
-    }
-    public function setData($data_cadastro){
-        $data_cadastro = $data_cadastro;
+        $this->token = $token; // Corrigido para usar $this->token
     }
 
-    //Opcionalmente, criar o ToString() da classe
+    public function setData($data_cadastro) {
+        $this->data_cadastro = $data_cadastro; // Corrigido para usar $this->data_cadastro
+    }
+
+    // Opcionalmente, criar o toString() da classe
 }
 ?>
