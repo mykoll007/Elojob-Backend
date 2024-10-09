@@ -507,14 +507,14 @@ if ($email) {
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>RECUPERAR SENHA</h2>
-                <form action="" method="post">
+                <form action="../elojob-backend/service/AuthService.php" method="post">
 
                     <label for="RecuperarEmail">Email</label>
                     <input type="email" id="RecuperarEmail" name="email" required>
 
 
                     <div class="align-btn">
-                        <button type="submit">ENVIAR CÓDIGO</button>
+                        <button type="submit" name="action" value="recover_password">ENVIAR CÓDIGO</button>
                     </div>
                 </form>
 

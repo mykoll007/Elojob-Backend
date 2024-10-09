@@ -58,6 +58,40 @@ class UsuarioDAO{
             return false;
         }
     }
+
+    public function getByToken($token) {
+        // Prepara a consulta SQL
+        $sql = "SELECT * FROM usuarios WHERE token = :token LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+
+        // Verifica se um usuário foi encontrado
+        if ($stmt->rowCount() > 0) {
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            return new Usuario(
+                $data['id_cadastro'],
+                $data['nome'],
+                $data['senha'],
+                $data['email'],
+                $data['token'],
+                $data['data_cadastro']
+            );
+        }
+
+        return null; // Retorna null se nenhum usuário foi encontrado
+    }
+
+    public function updatePassword($id, $senha) {
+        try {
+            $sql = "UPDATE usuarios SET senha = :senha, token = NULL WHERE id_cadastro = :id"; // Limpa o token após a redefinição
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':id' => $id, ':senha' => $senha]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 
 ?>

@@ -4,6 +4,8 @@ session_start();
 
 require_once '../model/Usuario.php';
 require_once '../dao/UsuarioDAO.php';
+require_once 'EmailService.php';
+
 
 $type = filter_input(INPUT_POST, "type");
 
@@ -118,4 +120,36 @@ function handleLogout(){
     header("Location: ../index.php");
 }
 
+
+
+if (isset($_POST['action']) && $_POST['action'] === 'recover_password') {
+    handleRecuperarSenha();
+}
+
+
+function handleRecuperarSenha()
+{
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $usuarioDAO = new UsuarioDAO();
+    $usuario = $usuarioDAO->getByEmail($email);
+
+    if ($usuario) {
+        // Gerar um token único
+        $token = bin2hex(random_bytes(25));
+        $usuarioDAO->updateToken($usuario->getId(), $token);
+
+        // Enviar e-mail com o link para redefinição de senha
+        $to = $usuario->getEmail();
+        $subject = 'Recuperação de Senha';
+        $message = "Clique no link abaixo para redefinir sua senha:<br>";
+        $message .= "http://localhost/elojob-backend/redefinir_senha.php?token=$token";
+
+        $emailService = new EmailService();
+        $emailService->enviarEmail($to, $subject, $message);
+
+        echo "Um e-mail com instruções foi enviado para $email.";
+    } else {
+        echo "E-mail não encontrado!";
+    }
+}
 ?>
