@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once '../model/Usuario.php';
+require_once '../dao/Usuario.php';
 require_once '../dao/UsuarioDAO.php';
 
 $type = filter_input(INPUT_POST, "type");
@@ -98,6 +98,11 @@ function handleLogin()
     $usuarioDAO->updateToken($usuario->getId(), $token);
 
     $_SESSION['token'] = $token;
+    $_SESSION['email'] = $usuario->getEmail();
+    $_SESSION['nome'] = $usuario->getNome();
+
+
+
     header('Location: ../index.php');
     exit();
 }

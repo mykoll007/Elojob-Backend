@@ -1,6 +1,21 @@
 <?php
 session_start();
 
+require_once 'dao/UsuarioDAO.php';
+require_once 'dao/Usuario.php';
+
+$usuarioDAO = new UsuarioDAO();
+
+// Obtenha o email armazenado na sessão
+$email = $_SESSION['user_email'] ?? null;
+
+// Verifique se o email existe na sessão antes de tentar buscar o usuário
+if ($email) {
+    $usuario = $usuarioDAO->getByEmail($email);
+} else {
+    $usuario = null; // Se não houver email na sessão, defina como nulo
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -84,10 +99,11 @@ session_start();
         </div>
 
         <!--Parte Usuario-->
+       
         <div class="content-usuario">
             <img src="assets/images/usuario.png" alt="icone usuario">
-            <h4>Mykoll Daniel</h4>
-            <p class="email">mykoll.daniel@gmail.com</p>
+            <h4><?php echo $_SESSION['nome']; ?></h4>
+            <p class="email"><?php echo $_SESSION['email']; ?></p>
             <div class="align-itensUsuario">
                 <img src="assets/images/carrinho.png" alt="icone carrinho de pedidos">
                 <a href="pages/eventos.html">
