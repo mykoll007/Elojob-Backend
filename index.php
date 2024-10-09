@@ -2,7 +2,7 @@
 session_start();
 
 require_once 'dao/UsuarioDAO.php';
-require_once 'dao/Usuario.php';
+require_once 'model/Usuario.php';
 
 $usuarioDAO = new UsuarioDAO();
 
