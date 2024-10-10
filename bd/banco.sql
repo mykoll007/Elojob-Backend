@@ -9,6 +9,7 @@ CREATE TABLE `bd_elojob`.`usuarios` (
   `senha` VARCHAR(100) NOT NULL,
   `telefone` VARCHAR(20) NOT NULL,
   `token` VARCHAR(255) DEFAULT NULL,
+  `token` VARCHAR(6) DEFAULT NULL,
   `data_cadastro` DATETIME NOT NULL,
   PRIMARY KEY (`id_cadastro`))
   ENGINE = InnoDB
