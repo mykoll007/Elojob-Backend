@@ -46,12 +46,14 @@ function handlerRegistration()
 
     // Verificar os dados informados
     if(!$email || !$nome || !$password) {
-        echo "Dados de input inválidos";
+        // echo "Dados de input inválidos";
+        header("Location: ../index.php?erro=input_invalido");
         return;
     }
 
     if($password !== $confirm_password) {
-        echo "Senhas incompatíveis.";
+        // echo "Senhas incompatíveis.";
+        header("Location: ../index.php?erro=senhas_incompativeis");
         return;
     }    
 
@@ -69,7 +71,8 @@ function handlerRegistration()
 
     if($usuarioDAO->getByEmail($email))
     {
-        echo "Email já utilizado";
+        // echo "Email já utilizado";
+        header("Location: ../index.php?erro=email_ja_registrado");
         return;
     }
    
@@ -101,7 +104,8 @@ function handleLogin()
 
    // Verifica se o usuário existe e se a senha informada confere com o hash armazenado
    if (!$usuario || !password_verify($senha, $usuario->getSenha())) {
-    echo "Email ou senha inválidos!";
+    // echo "Email ou senha inválidos!";
+    header("Location: ../index.php?erroLogin=credenciais_invalidas");
     return;
 }
 
@@ -203,7 +207,7 @@ function handleRedefinirSenha()
 
     // Validação da nova senha
     if (strlen($senhaNova) < 5) {
-        header("Location: ../index.php?codigo_verificacao=" . urlencode($codigoVerificacao) . "&erro=senha_curta");
+         header("Location: ../index.php?codigo_verificacao=" . urlencode($codigoVerificacao) . "&erro=senha_curta");
         return;
     }
     

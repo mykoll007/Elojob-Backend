@@ -18,7 +18,47 @@ if ($email) {
 
 // ----Comportamentos dos Modais---- 
 
-// Verifique se o código foi enviado e abra o modal
+// Verifica se há um erro de registro na URL  - *Modal Registrar*
+if (isset($_GET['erro'])) {
+    $erro = $_GET['erro'];
+
+    // Exibe mensagens de erro personalizadas
+    if ($erro == 'input_invalido') {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('erroCadastrar').innerText = 'Todos os campos são obrigatórios.';
+                openModalRegistrar(); // Função para abrir o modal de cadastro
+            });
+        </script>";
+    } elseif ($erro == 'senhas_incompativeis') {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('erroCadastrar').innerText = 'As senhas não coincidem.';
+                openModalRegistrar(); // Função para abrir o modal de cadastro
+            });
+        </script>";
+    } elseif ($erro == 'email_ja_registrado') {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('erroCadastrar').innerText = 'O email já está registrado.';
+                openModalRegistrar(); // Função para abrir o modal de cadastro
+            });
+        </script>";
+    }
+}
+
+
+// Verifica se há erro de credenciais inválidas na URL - *Modal Login*
+if (isset($_GET['erroLogin']) && $_GET['erroLogin'] == 'credenciais_invalidas') {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('erroLogin').innerText = 'Email ou senha inválidos!';
+            openModalIniciar(); // Função para abrir o modal de login
+        });
+    </script>";
+}
+
+// Verifique se o código foi enviado e abra o modal - *Modal Abrir Código de Verificação*
 if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
     echo "<script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -27,7 +67,7 @@ if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
     </script>";
 }
 
-// Verificar se o código de verificação foi passado na URL - Modal Redefinir
+// Verificar se o código de verificação foi passado na URL - *Modal Redefinir*
 if (isset($_GET['codigo_verificacao'])) {
     $codigoVerificacao = htmlspecialchars($_GET['codigo_verificacao']);
     $erro = isset($_GET['erro']) ? htmlspecialchars($_GET['erro']) : '';
@@ -53,7 +93,7 @@ if (isset($_GET['codigo_verificacao'])) {
 }
 
 
-// Exibir mensagem de sucesso ao redefinir a senha - Modal Mensagem Senha Redefinida
+// Exibir mensagem de sucesso ao redefinir a senha - *Modal Mensagem Senha Redefinida*
 if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
     echo "<script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -509,6 +549,7 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
 
                     <label for="login-password">Senha</label>
                     <input type="password" id="login-password" name="password" required>
+                    <p id="erroLogin" style="color: red;"></p>
 
                     <div class="align-btn">
                         <button type="submit">INICIAR SESSÃO</button>
@@ -527,6 +568,8 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>CADASTRE-SE</h2>
+                <!-- Exibição da mensagem de erro-->
+                <p id="erroCadastrar" style="color: red;"></p>
                 <form action="../elojob-backend/service/AuthService.php" method="post">
                     <input type="hidden" name="type" value="register">
                     <label for="nome">Nome</label>
