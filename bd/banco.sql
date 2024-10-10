@@ -8,9 +8,9 @@ CREATE TABLE `bd_elojob`.`usuarios` (
   `email` VARCHAR(100) NOT NULL,
   `senha` VARCHAR(100) NOT NULL,
   `telefone` VARCHAR(20) NOT NULL,
-  `token` VARCHAR(255) DEFAULT NULL,
-  `token` VARCHAR(6) DEFAULT NULL,
+  `token` VARCHAR(255) DEFAULT NULL,,
   `data_cadastro` DATETIME NOT NULL,
+  `codigo_verificacao` VARCHAR(6) DEFAULT NULL
   PRIMARY KEY (`id_cadastro`))
   ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
