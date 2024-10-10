@@ -11,10 +11,16 @@ if (isset($_GET['codigo_verificacao'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lógica para redefinir a senha
     $senhaNova = filter_input(INPUT_POST, 'senha_nova');
+    $senhaConfirmacao = filter_input(INPUT_POST, 'senha_confirmacao');
 
     // Validação da nova senha
     if (strlen($senhaNova) < 5) {
         echo "A senha deve ter pelo menos 5 caracteres.";
+        exit;
+    }
+    // Verificar se as senhas coincidem
+    if ($senhaNova !== $senhaConfirmacao) {
+        echo "As senhas não coincidem. Tente novamente.";
         exit;
     }
 
@@ -46,6 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="senha_nova">Nova Senha:</label>
         <input type="password" id="senha_nova" name="senha_nova" required>
         <br><br>
+
+        <label for="senha_confirmacao">Confirme a Nova Senha:</label>
+        <input type="password" id="senha_confirmacao" name="senha_confirmacao" required>
+        <br><br>
+        
         <button type="submit">Redefinir Senha</button>
     </form>
 </body>
