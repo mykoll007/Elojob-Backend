@@ -89,13 +89,14 @@ class UsuarioDAO{
         $stmt->bindValue(':id', $idUsuario);
         $stmt->execute();
     }
+    
     public function getByCodigoVerificacao($codigoVerificacao) {
         $sql = "SELECT * FROM usuarios WHERE codigo_verificacao = :codigo_verificacao";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':codigo_verificacao', $codigoVerificacao);
         $stmt->execute();
 
-// Pega os dados do usuário (se existirem)
+    // Pega os dados do usuário (se existirem)
     $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Retorna um novo objeto Usuario com os dados encontrados ou null
