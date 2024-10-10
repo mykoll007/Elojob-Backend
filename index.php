@@ -16,7 +16,21 @@ if ($email) {
     $usuario = null; // Se não houver email na sessão, defina como nulo
 }
 
+// ----Comportamentos dos Modais---- 
+
+// Verifique se o código foi enviado e abra o modal
+if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
+    echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                openModalDigiteCodigo(); // Função para abrir o modal de código
+            });
+          </script>";
+}
+
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -78,19 +92,19 @@ if ($email) {
                 <li><a href="pages/eventos.html">EVENTOS</a></li>
 
                 <?php if(isset($_SESSION['token'])) : ?>
-                <div class="itens-logado">   
-                <li><a href="pages/eventos.html">Meus Pedidos</a></li>
-                <li><a href="pages/eventos.html">Alterar dados</a></li>
-                <li>
-                    <form action="../elojob-backend/service/AuthService.php" method="post" style="display: inline;">
-                        <input type="hidden" name="type" value="logout">
-                        <button type="submit">
-                            Sair
-                        </button>
-                    </form>
-                </li>
-                <div>
-                <?php endif; ?>
+                <div class="itens-logado">
+                    <li><a href="pages/eventos.html">Meus Pedidos</a></li>
+                    <li><a href="pages/eventos.html">Alterar dados</a></li>
+                    <li>
+                        <form action="../elojob-backend/service/AuthService.php" method="post" style="display: inline;">
+                            <input type="hidden" name="type" value="logout">
+                            <button type="submit">
+                                Sair
+                            </button>
+                        </form>
+                    </li>
+                    <div>
+                        <?php endif; ?>
             </ul>
         </nav>
         <?php if(isset($_SESSION['token'])) : ?>
@@ -99,11 +113,15 @@ if ($email) {
         </div>
 
         <!--Parte Usuario-->
-       
+
         <div class="content-usuario">
             <img src="assets/images/usuario.png" alt="icone usuario">
-            <h4><?php echo $_SESSION['nome']; ?></h4>
-            <p class="email"><?php echo $_SESSION['email']; ?></p>
+            <h4>
+                <?php echo $_SESSION['nome']; ?>
+            </h4>
+            <p class="email">
+                <?php echo $_SESSION['email']; ?>
+            </p>
             <div class="align-itensUsuario">
                 <img src="assets/images/carrinho.png" alt="icone carrinho de pedidos">
                 <a href="pages/eventos.html">
@@ -503,10 +521,11 @@ if ($email) {
         <!--Modal Recuperar Senha-->
 
         <div id="modalRecuperarSenha">
-            <div id="modal-content2">
+            <div id="modal-content3">
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>RECUPERAR SENHA</h2>
+                <input type="hidden" name="type" value="recover">
                 <form action="../elojob-backend/service/AuthService.php" method="post">
 
                     <label for="RecuperarEmail">Email</label>
@@ -514,12 +533,47 @@ if ($email) {
 
 
                     <div class="align-btn">
-                        <button type="submit" name="action" value="recover_password">ENVIAR CÓDIGO</button>
+                        <button type="submit"  id="enviarCodigo" name="action" value="recover_password">ENVIAR CÓDIGO</button>
                     </div>
                 </form>
 
             </div>
         </div>
+
+        <!--Modal Digite o Código-->
+        <div id="modalDigiteCodigo">
+        <div id="modal-content4">
+            <p class="close">&times;</p>
+            <img src="assets/images/logoCronos.png" alt="logo Cronos">
+            <h2>RECUPERAR SENHA</h2>
+            <p>Digite o código de verificação:</p>
+            <form action="../elojob-backend/service/AuthService.php" method="post">
+            <input type="hidden" name="type" value="codigo">
+                <div id="container-codigo">
+                    <div id="align-codigo1">
+                        <input type="number" class="codigo-verificacao" name="codigo1" oninput="moveFocus(this, 'codigo2')" maxlength="1" required>
+                        <input type="number" class="codigo-verificacao" name="codigo2" oninput="moveFocus(this, 'codigo3')" maxlength="1" required>
+                        <input type="number" class="codigo-verificacao" name="codigo3" oninput="moveFocus(this, 'codigo4')" maxlength="1" required>
+                    </div>
+                    
+                    <div id="align-codigo2">
+                        <input type="number" class="codigo-verificacao" name="codigo4" oninput="moveFocus(this, 'codigo5')" maxlength="1" required>
+                        <input type="number" class="codigo-verificacao" name="codigo5" oninput="moveFocus(this, 'codigo6')" maxlength="1" required>
+                        <input type="number" class="codigo-verificacao" name="codigo6" oninput="moveFocus(this)" maxlength="1" required>
+                    </div>
+                </div>
+                <p>Seu código de verificação foi enviado para seu email, digite o código.</p>
+                <p id="codigoMensagem" style="color: red; justify-content: center; display: <?php echo (isset($_GET['codigo_enviado']) && isset($_GET['erro']) && $_GET['erro'] == 'codigo_invalido') ? 'flex' : 'none'; ?>;">
+                Código de verificação inválido!
+            </p>
+                <div class="align-btn">
+                    <button type="submit">CONFIRMAR CÓDIGO</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 
     </main>
     <footer>
@@ -565,8 +619,8 @@ if ($email) {
     <script src="assets/js/index.js"></script>
     <script>
         // Função para adicionar a classe #itens.active na responsive.css para cobrir os itens quando logado 
-    document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('itens').classList.toggle('active', <?php echo isset($_SESSION['token']) ? 'true' : 'false'; ?>);});
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('itens').classList.toggle('active', <? php echo isset($_SESSION['token']) ? 'true' : 'false'; ?>);});
     </script>
 
 

@@ -20,6 +20,12 @@ switch($type)
     case "logout":
         handleLogout();
         break;
+    case "recover":
+        handleRecuperarSenha();
+        break;
+    case "codigo" :
+        handleCodigoVerificacao();
+        break;
     default:
         echo "Ação inválida";
         break;
@@ -149,12 +155,38 @@ function handleRecuperarSenha()
         $emailService->enviarEmail($to, $subject, $message);
     
          // Redirecionar para a página de redefinição de senha com o código na URL
-         header("Location: ../verificar_codigo.php");
+         header("Location: ../index.php?codigo_enviado=1");
          exit();
     } else {
         echo "E-mail não encontrado!";
     }
     
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'verificar_codigo') {
+    handleCodigoVerificacao();
+}
+function handleCodigoVerificacao()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Concatena o código de verificação dos inputs do formulário
+        $codigoVerificacao = $_POST['codigo1'] . $_POST['codigo2'] . $_POST['codigo3'] . $_POST['codigo4'] . $_POST['codigo5'] . $_POST['codigo6'];
+
+        $usuarioDAO = new UsuarioDAO();
+        // Busca o usuário pelo código de verificação
+        $usuario = $usuarioDAO->getByCodigoVerificacao($codigoVerificacao);
+
+
+        if ($usuario) {
+           
+            header("Location: ../redefinir_senha.php?codigo_verificacao=" . $codigoVerificacao);
+            exit(); 
+        } else {
+            
+            header("Location: ../index.php?codigo_enviado=1&erro=codigo_invalido");
+            exit(); 
+        }
+    }
 }
 
 ?>

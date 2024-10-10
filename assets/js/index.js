@@ -115,14 +115,36 @@ document
     }
   });
 
-// Modais Abrir e Fechar
+  // Modal Digite o Código 
   
-// Selecionar elementos
+  // Manipulando Input para ser 1 digito e passar para o próximo quando digitado
+  function moveFocus(currentInput, nextInputName) {
+    // Verifica se o valor do campo atual não é um dígito válido
+    if (!/^\d?$/.test(currentInput.value)) {
+        // Limpa o campo se não for um dígito válido
+        currentInput.value = '';
+    }
+
+    // Move o foco para o próximo campo se um dígito for digitado
+    if (currentInput.value.length === 1) {
+        const nextInput = document.querySelector(`input[name="${nextInputName}"]`);
+        nextInput?.focus();
+    }
+}
+
+
+
+
+
+
+// Modais Abrir e Fechar
 const btnIniciar = document.getElementById('btnIniciar');
 const modalIniciar = document.getElementById('modalIniciar');
-const closeButtons = document.querySelectorAll('.close');
+const closeButtons = document.querySelectorAll('.close'); // Seleciona todos os botões de fechar
 const btnCadastrar = document.querySelector('.register-text a:nth-of-type(1)'); 
 const btnEsqueceuSenha = document.getElementById('esqueceu-senha'); 
+// const btnEnviarCodigo = document.getElementById('enviarCodigo'); // Selecionar o botão "ENVIAR CÓDIGO"
+const modalDigiteCodigo = document.getElementById('modalDigiteCodigo');
 
 // Função para abrir o modal de iniciar sessão
 function openModalIniciar() {
@@ -135,7 +157,7 @@ function closeModals() {
   modalIniciar.style.display = 'none';
   document.getElementById('modalRegistrar').style.display = 'none';
   document.getElementById('modalRecuperarSenha').style.display = 'none';
-
+  modalDigiteCodigo.style.display = 'none';
 }
 
 // Função para abrir o modal de registro
@@ -152,34 +174,37 @@ function openModalRecuperarSenha() {
   document.getElementById('modalRecuperarSenha').style.position = 'fixed';
 }
 
+// Função para abrir o modal de digitar código
+function openModalDigiteCodigo() {
+  closeModals(); // Fecha outros modais abertos
+  modalDigiteCodigo.style.display = 'flex'; // Abre o modal de digitar código
+  modalDigiteCodigo.style.position = 'fixed';
+}
+
+// Fechar modais ao clicar no "X"
+closeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    closeModals(); // Fecha todos os modais quando o "X" for clicado
+  });
+});
+
 // Eventos de clique
 btnIniciar.addEventListener('click', (event) => {
   event.preventDefault(); // Previne o comportamento padrão do link
   openModalIniciar();
 });
+
 btnCadastrar.addEventListener('click', (event) => {
   event.preventDefault(); // Previne o comportamento padrão do link
   openModalRegistrar();
 });
+
 btnEsqueceuSenha.addEventListener('click', (event) => {
   event.preventDefault(); // Previne o comportamento padrão do link
   openModalRecuperarSenha();
 });
 
-// Fechar modais ao clicar no "X"
-closeButtons.forEach(button => {
-  button.addEventListener('click', closeModals);
-});
 
-// // Fechar modais ao clicar fora deles
-// window.addEventListener('click', (event) => {
-//   if (event.target === modalIniciar) {
-//     closeModals();
-//   }
-//   if (event.target === document.getElementById('modalRegistrar')) {
-//     closeModals();
-//   }
-//   if (event.target === document.getElementById('modalRecuperarSenha')) {
-//     closeModals();
-//   }
-// });
+
+
+
