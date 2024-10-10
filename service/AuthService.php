@@ -26,6 +26,9 @@ switch($type)
     case "codigo" :
         handleCodigoVerificacao();
         break;
+    case 'redefinir' :
+        handleRedefinirSenha();
+        break;
     default:
         echo "Ação inválida";
         break;
@@ -162,7 +165,7 @@ function handleRecuperarSenha()
     }
     
 }
-
+// ----------------Verificar Codigo----------
 if (isset($_POST['action']) && $_POST['action'] === 'verificar_codigo') {
     handleCodigoVerificacao();
 }
@@ -178,14 +181,49 @@ function handleCodigoVerificacao()
 
 
         if ($usuario) {
-           
-            header("Location: ../redefinir_senha.php?codigo_verificacao=" . $codigoVerificacao);
+            // Redireciona para o index.php com o código de verificação
+            header("Location: ../index.php?codigo_verificacao=" . urlencode($codigoVerificacao));
             exit(); 
         } else {
             
             header("Location: ../index.php?codigo_enviado=1&erro=codigo_invalido");
             exit(); 
         }
+    }
+}
+
+// -----------------Redefinir------------
+
+function handleRedefinirSenha()
+{
+    // Receber o código de verificação
+    $codigoVerificacao = filter_input(INPUT_POST, 'codigo_verificacao');
+    $senhaNova = filter_input(INPUT_POST, 'senha_nova');
+    $senhaConfirmacao = filter_input(INPUT_POST, 'senha_confirmacao');
+
+    // Validação da nova senha
+    if (strlen($senhaNova) < 5) {
+        header("Location: ../index.php?codigo_verificacao=" . urlencode($codigoVerificacao) . "&erro=senha_curta");
+        return;
+    }
+    
+    // Verificar se as senhas coincidem
+    if ($senhaNova !== $senhaConfirmacao) {
+        header("Location: ../index.php?codigo_verificacao=" . urlencode($codigoVerificacao) . "&erro=senhas_nao_coincidem");
+        return;
+    }
+
+    // Buscar usuário pelo código de verificação
+    $usuarioDAO = new UsuarioDAO();
+    $usuario = $usuarioDAO->getByCodigoVerificacao($codigoVerificacao); 
+
+    if ($usuario) {
+        // Atualizar a senha
+        $usuarioDAO->updatePassword($usuario->getId(), password_hash($senhaNova, PASSWORD_DEFAULT)); // Função de update de senha
+        header("Location: ../index.php?senha_redefinida=1");
+        exit(); // Finaliza o script para garantir o redirecionamento
+    } else {
+        echo "Código de verificação inválido ou expirado!";
     }
 }
 

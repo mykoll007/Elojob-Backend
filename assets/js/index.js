@@ -143,8 +143,9 @@ const modalIniciar = document.getElementById('modalIniciar');
 const closeButtons = document.querySelectorAll('.close'); // Seleciona todos os botões de fechar
 const btnCadastrar = document.querySelector('.register-text a:nth-of-type(1)'); 
 const btnEsqueceuSenha = document.getElementById('esqueceu-senha'); 
-// const btnEnviarCodigo = document.getElementById('enviarCodigo'); // Selecionar o botão "ENVIAR CÓDIGO"
 const modalDigiteCodigo = document.getElementById('modalDigiteCodigo');
+const modalRenovaSenha = document.getElementById('modalRenovaSenha');
+const modalMensagemSenha = document.getElementById('modalMensagemSenha');
 
 // Função para abrir o modal de iniciar sessão
 function openModalIniciar() {
@@ -158,6 +159,8 @@ function closeModals() {
   document.getElementById('modalRegistrar').style.display = 'none';
   document.getElementById('modalRecuperarSenha').style.display = 'none';
   modalDigiteCodigo.style.display = 'none';
+  modalRenovaSenha.style.display = 'none';
+  modalMensagemSenha.style.display = 'none';
 }
 
 // Função para abrir o modal de registro
@@ -177,8 +180,14 @@ function openModalRecuperarSenha() {
 // Função para abrir o modal de digitar código
 function openModalDigiteCodigo() {
   closeModals(); // Fecha outros modais abertos
-  modalDigiteCodigo.style.display = 'flex'; // Abre o modal de digitar código
+  modalDigiteCodigo.style.display = 'flex'; 
   modalDigiteCodigo.style.position = 'fixed';
+}
+
+function openModalMensagem(){
+  closeModals();
+  modalMensagemSenha.style.display = 'flex';
+  modalMensagemSenha.style.position = 'fixed';
 }
 
 // Fechar modais ao clicar no "X"

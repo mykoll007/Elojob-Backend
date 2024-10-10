@@ -21,13 +21,46 @@ if ($email) {
 // Verifique se o código foi enviado e abra o modal
 if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
     echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                openModalDigiteCodigo(); // Função para abrir o modal de código
-            });
-          </script>";
+        document.addEventListener('DOMContentLoaded', function () {
+            openModalDigiteCodigo(); // Função para abrir o modal de código
+        });
+    </script>";
+}
+
+// Verificar se o código de verificação foi passado na URL - Modal Redefinir
+if (isset($_GET['codigo_verificacao'])) {
+    $codigoVerificacao = htmlspecialchars($_GET['codigo_verificacao']);
+    $erro = isset($_GET['erro']) ? htmlspecialchars($_GET['erro']) : '';
+
+    echo "<script>
+        function openModalRenovaSenha() {
+            closeModals();
+            document.getElementById('modalRenovaSenha').style.display = 'flex'; 
+            document.getElementById('modalRenovaSenha').style.position = 'fixed';
+            document.getElementById('codigo_verificacao').value = '$codigoVerificacao'; // Adiciona o código ao campo oculto
+            // Exibir mensagem de erro, se houver
+            if ('$erro' === 'senha_curta') {
+                document.getElementById('erroMensagem').textContent = 'A senha deve ter pelo menos 5 caracteres.';
+            } else if ('$erro' === 'senhas_nao_coincidem') {
+                document.getElementById('erroMensagem').textContent = 'As senhas não coincidem. Tente novamente.';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            openModalRenovaSenha();
+        });
+
+    </script>";
 }
 
 
+// Exibir mensagem de sucesso ao redefinir a senha - Modal Mensagem Senha Redefinida
+if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
+    echo "<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        openModalMensagem(); // Função para abrir o modal da mensagem
+    });
+</script>";
+}
 
 ?>
 
@@ -533,7 +566,8 @@ if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
 
 
                     <div class="align-btn">
-                        <button type="submit"  id="enviarCodigo" name="action" value="recover_password">ENVIAR CÓDIGO</button>
+                        <button type="submit" id="enviarCodigo" name="action" value="recover_password">ENVIAR
+                            CÓDIGO</button>
                     </div>
                 </form>
 
@@ -542,37 +576,78 @@ if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
 
         <!--Modal Digite o Código-->
         <div id="modalDigiteCodigo">
-        <div id="modal-content4">
-            <p class="close">&times;</p>
-            <img src="assets/images/logoCronos.png" alt="logo Cronos">
-            <h2>RECUPERAR SENHA</h2>
-            <p>Digite o código de verificação:</p>
-            <form action="../elojob-backend/service/AuthService.php" method="post">
-            <input type="hidden" name="type" value="codigo">
-                <div id="container-codigo">
-                    <div id="align-codigo1">
-                        <input type="number" class="codigo-verificacao" name="codigo1" oninput="moveFocus(this, 'codigo2')" maxlength="1" required>
-                        <input type="number" class="codigo-verificacao" name="codigo2" oninput="moveFocus(this, 'codigo3')" maxlength="1" required>
-                        <input type="number" class="codigo-verificacao" name="codigo3" oninput="moveFocus(this, 'codigo4')" maxlength="1" required>
-                    </div>
-                    
-                    <div id="align-codigo2">
-                        <input type="number" class="codigo-verificacao" name="codigo4" oninput="moveFocus(this, 'codigo5')" maxlength="1" required>
-                        <input type="number" class="codigo-verificacao" name="codigo5" oninput="moveFocus(this, 'codigo6')" maxlength="1" required>
-                        <input type="number" class="codigo-verificacao" name="codigo6" oninput="moveFocus(this)" maxlength="1" required>
-                    </div>
-                </div>
-                <p>Seu código de verificação foi enviado para seu email, digite o código.</p>
-                <p id="codigoMensagem" style="color: red; justify-content: center; display: <?php echo (isset($_GET['codigo_enviado']) && isset($_GET['erro']) && $_GET['erro'] == 'codigo_invalido') ? 'flex' : 'none'; ?>;">
-                Código de verificação inválido!
-            </p>
-                <div class="align-btn">
-                    <button type="submit">CONFIRMAR CÓDIGO</button>
-                </div>
-            </form>
-        </div>
-    </div>
+            <div id="modal-content4">
+                <p class="close">&times;</p>
+                <img src="assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>RECUPERAR SENHA</h2>
+                <p>Digite o código de verificação:</p>
+                <form action="../elojob-backend/service/AuthService.php" method="post">
+                    <input type="hidden" name="type" value="codigo">
+                    <div id="container-codigo">
+                        <div id="align-codigo1">
+                            <input type="number" class="codigo-verificacao" name="codigo1"
+                                oninput="moveFocus(this, 'codigo2')" maxlength="1" required>
+                            <input type="number" class="codigo-verificacao" name="codigo2"
+                                oninput="moveFocus(this, 'codigo3')" maxlength="1" required>
+                            <input type="number" class="codigo-verificacao" name="codigo3"
+                                oninput="moveFocus(this, 'codigo4')" maxlength="1" required>
+                        </div>
 
+                        <div id="align-codigo2">
+                            <input type="number" class="codigo-verificacao" name="codigo4"
+                                oninput="moveFocus(this, 'codigo5')" maxlength="1" required>
+                            <input type="number" class="codigo-verificacao" name="codigo5"
+                                oninput="moveFocus(this, 'codigo6')" maxlength="1" required>
+                            <input type="number" class="codigo-verificacao" name="codigo6" oninput="moveFocus(this)"
+                                maxlength="1" required>
+                        </div>
+                    </div>
+                    <p>Seu código de verificação foi enviado para seu email, digite o código.</p>
+                    <p id="codigoMensagem"
+                        style="color: red; justify-content: center; display: <?php echo (isset($_GET['codigo_enviado']) && isset($_GET['erro']) && $_GET['erro'] == 'codigo_invalido') ? 'flex' : 'none'; ?>;">
+                        Código de verificação inválido!
+                    </p>
+                    <div class="align-btn">
+                        <button type="submit">CONFIRMAR CÓDIGO</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Modal Renovar a Senha-->
+        <div id="modalRenovaSenha">
+            <div id="modal-content5">
+                <p class="close">&times;</p>
+                <img src="assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>REDEFINIR SENHA</h2>
+                <!-- Mensagem de erro aqui -->
+                <p id="erroMensagem" style="color: red;"></p>
+                <form action="../elojob-backend/service/AuthService.php" method="post">
+                <input type="hidden" name="type" value="redefinir">
+                <input type="hidden" id="codigo_verificacao" name="codigo_verificacao" value="">
+                    <label for="senha_nova">Nova Senha:</label>
+                    <input type="password" id="senha_nova" name="senha_nova" required>
+
+                    <label for="senha_confirmacao">Confirme a Nova Senha:</label>
+                    <input type="password" id="senha_confirmacao" name="senha_confirmacao" required>
+
+                    <div class="align-btn">
+                        <button type="submit">REDEFINIR SENHA</button>
+                    </div>
+                </form>     
+        </div>
+        </div>
+
+        <!--Modal Mensagem-->
+        <div id="modalMensagemSenha">
+            <div id="mensagem-senha">
+                <img src="assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>Senha Redefinida com Sucesso!</h2>
+                <div class="align-btn">
+                        <button class="close" id="fecharMensagem">FECHAR</button>
+                    </div>
+            </div>
+        </div>
 
 
     </main>

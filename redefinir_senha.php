@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once 'dao/UsuarioDAO.php';
 
 if (isset($_GET['codigo_verificacao'])) {
@@ -60,4 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Redefinir Senha</button>
     </form>
 </body>
-</html>
+</html> -->

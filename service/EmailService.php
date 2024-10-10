@@ -80,7 +80,7 @@ class EmailService {
                 <div class="container">
                     <h2>Código de Verificação para Redefinição de Senha</h2>
                     <p>Seu código de verificação para redefinir a senha é:</p>
-                    <div class="code">' . $codigoVerificacao . '</div>
+                    <div class="code">' .  $codigoVerificacao . '</div>
                 </div>
             </body>
             </html>
