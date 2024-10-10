@@ -165,7 +165,8 @@ function handleRecuperarSenha()
          header("Location: ../index.php?codigo_enviado=1");
          exit();
     } else {
-        echo "E-mail não encontrado!";
+        // echo "E-mail não encontrado!";    
+        header("Location: ../index.php?erroEmail=email_nao_encontrado");
     }
     
 }

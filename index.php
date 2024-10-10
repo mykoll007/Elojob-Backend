@@ -58,6 +58,19 @@ if (isset($_GET['erroLogin']) && $_GET['erroLogin'] == 'credenciais_invalidas') 
     </script>";
 }
 
+// Exibir mensagem de erro ao não encontrar o e-mail - *Modal Recuperar*
+if (isset($_GET['erroEmail'])) {
+    if ($_GET['erroEmail'] === 'email_nao_encontrado') {
+        echo "<script>
+        document.addEventListener('DOMContentLoaded', function(){
+            document.getElementById('erroEmail').textContent = 'E-mail não encontrado!';
+            openModalRecuperarSenha();
+        });
+        </script>";
+    }
+}
+
+
 // Verifique se o código foi enviado e abra o modal - *Modal Abrir Código de Verificação*
 if (isset($_GET['codigo_enviado']) && $_GET['codigo_enviado'] == 1) {
     echo "<script>
@@ -549,6 +562,7 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
 
                     <label for="login-password">Senha</label>
                     <input type="password" id="login-password" name="password" required>
+                     <!-- Exibição da mensagem de erro-->
                     <p id="erroLogin" style="color: red;"></p>
 
                     <div class="align-btn">
@@ -601,6 +615,8 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
                 <p class="close">&times;</p>
                 <img src="assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>RECUPERAR SENHA</h2>
+                 <!-- Exibição da mensagem de erro-->
+                 <p id="erroEmail" style="color: red;"></p>
                 <input type="hidden" name="type" value="recover">
                 <form action="../elojob-backend/service/AuthService.php" method="post">
 

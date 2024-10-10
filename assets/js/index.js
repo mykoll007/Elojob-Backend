@@ -142,16 +142,11 @@ const btnIniciar = document.getElementById('btnIniciar');
 const modalIniciar = document.getElementById('modalIniciar');
 const closeButtons = document.querySelectorAll('.close'); // Seleciona todos os botões de fechar
 const btnCadastrar = document.querySelector('.register-text a:nth-of-type(1)'); 
-const btnEsqueceuSenha = document.getElementById('esqueceu-senha'); 
+const btnEsqueceuSenha = document.getElementById('esqueceu-senha');
+const modalRecuperarSenha = document.getElementById('modalRecuperarSenha');
 const modalDigiteCodigo = document.getElementById('modalDigiteCodigo');
 const modalRenovaSenha = document.getElementById('modalRenovaSenha');
 const modalMensagemSenha = document.getElementById('modalMensagemSenha');
-
-// Função para abrir o modal de iniciar sessão
-function openModalIniciar() {
-  modalIniciar.style.display = 'flex';
-  modalIniciar.style.position = 'fixed';
-}
 
 // Função para fechar todos os modais
 function closeModals() {
@@ -161,6 +156,12 @@ function closeModals() {
   modalDigiteCodigo.style.display = 'none';
   modalRenovaSenha.style.display = 'none';
   modalMensagemSenha.style.display = 'none';
+}
+
+// Função para abrir o modal de iniciar sessão
+function openModalIniciar() {
+  modalIniciar.style.display = 'flex';
+  modalIniciar.style.position = 'fixed';
 }
 
 // Função para abrir o modal de registro
