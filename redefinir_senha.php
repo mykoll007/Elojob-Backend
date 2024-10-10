@@ -1,10 +1,10 @@
 <?php
 require_once 'dao/UsuarioDAO.php';
 
-if (isset($_GET['token'])) {
-    $token = $_GET['token'];
+if (isset($_GET['codigo_verificacao'])) {
+    $codigoVerificacao = $_GET['codigo_verificacao'];
 } else {
-    echo "Token inválido!";
+    echo "Código de verificação inválido!";
     exit;
 }
 
@@ -18,16 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Buscar usuário pelo token
+    // Buscar usuário pelo código de verificação
     $usuarioDAO = new UsuarioDAO();
-    $usuario = $usuarioDAO->getByToken($token); // Você deve implementar este método no UsuarioDAO
+    $usuario = $usuarioDAO->getByCodigoVerificacao($codigoVerificacao); // Já implementado no UsuarioDAO
 
     if ($usuario) {
         // Atualizar a senha
-        $usuarioDAO->updatePassword($usuario->getId(), password_hash($senhaNova, PASSWORD_DEFAULT)); // Implemente updatePassword no UsuarioDAO
+        $usuarioDAO->updatePassword($usuario->getId(), password_hash($senhaNova, PASSWORD_DEFAULT)); // Função de update de senha
         echo "Senha redefinida com sucesso!";
     } else {
-        echo "Token inválido ou expirado!";
+        echo "Código de verificação inválido ou expirado!";
     }
 }
 ?>

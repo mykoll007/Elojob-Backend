@@ -82,15 +82,40 @@ class UsuarioDAO{
         return null; // Retorna null se nenhum usuário foi encontrado
     }
 
-    public function updatePassword($id, $senha) {
-        try {
-            $sql = "UPDATE usuarios SET senha = :senha, token = NULL WHERE id_cadastro = :id"; // Limpa o token após a redefinição
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([':id' => $id, ':senha' => $senha]);
-            return true;
-        } catch (PDOException $e) {
-            return false;
-        }
+    public function updateCodigoVerificacao($idUsuario, $codigoVerificacao) {
+        $sql = "UPDATE usuarios SET codigo_verificacao = :codigo_verificacao WHERE id_cadastro = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':codigo_verificacao', $codigoVerificacao);
+        $stmt->bindValue(':id', $idUsuario);
+        $stmt->execute();
+    }
+    public function getByCodigoVerificacao($codigoVerificacao) {
+        $sql = "SELECT * FROM usuarios WHERE codigo_verificacao = :codigo_verificacao";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':codigo_verificacao', $codigoVerificacao);
+        $stmt->execute();
+
+// Pega os dados do usuário (se existirem)
+    $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Retorna um novo objeto Usuario com os dados encontrados ou null
+    return $dados ? new Usuario(
+        $dados['id_cadastro'],
+        $dados['nome'],
+        $dados['senha'],
+        $dados['email'],
+        $dados['token'],
+        $dados['data_cadastro']
+    ) : null;
+    }
+    
+
+    public function updatePassword($id, $novaSenha) {
+        $sql = "UPDATE usuarios SET senha = :senha WHERE id_cadastro = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':senha', $novaSenha);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
     }
 }
 

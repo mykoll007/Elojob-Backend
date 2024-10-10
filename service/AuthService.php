@@ -134,22 +134,27 @@ function handleRecuperarSenha()
     $usuario = $usuarioDAO->getByEmail($email);
 
     if ($usuario) {
-        // Gerar um token único
-        $token = bin2hex(random_bytes(25));
-        $usuarioDAO->updateToken($usuario->getId(), $token);
-
-        // Enviar e-mail com o link para redefinição de senha
-        $to = $usuario->getEmail();
-        $subject = 'Recuperação de Senha';
-        $message = "Clique no link abaixo para redefinir sua senha:<br>";
-        $message .= "http://localhost/elojob-backend/redefinir_senha.php?token=$token";
-
+        // Gerar um código de verificação de 6 dígitos
+        $codigoVerificacao = rand(100000, 999999);
+        $usuarioDAO->updateCodigoVerificacao($usuario->getId(), $codigoVerificacao); // Atualizando o código no banco
+    
+        // Criar uma nova instância do EmailService
         $emailService = new EmailService();
-        $emailService->enviarEmail($to, $subject, $message);
 
-        echo "Um e-mail com instruções foi enviado para $email.";
+        // Enviar e-mail com o código de verificação
+        $to = $usuario->getEmail();
+        $subject = 'Código de Verificação para Redefinição de Senha';
+        $message = "Seu código de verificação para redefinir a senha é: <strong>$codigoVerificacao</strong>";
+    
+        $emailService->enviarEmail($to, $subject, $message);
+    
+         // Redirecionar para a página de redefinição de senha com o código na URL
+         header("Location: ../verificar_codigo.php");
+         exit();
     } else {
         echo "E-mail não encontrado!";
     }
+    
 }
+
 ?>
