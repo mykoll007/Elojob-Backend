@@ -185,8 +185,8 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
-                    <li><a href="pages/eventos.html">Meus Pedidos</a></li>
-                    <li><a href="pages/eventos.html">Alterar dados</a></li>
+                    <li><a href="pages/alterar-dados.php">Meus Pedidos</a></li>
+                    <li><a href="pages/alterar-dados.php">Alterar dados</a></li>
                     <li>
                         <form action="../elojob-backend/service/AuthService.php" method="post" style="display: inline;">
                             <input type="hidden" name="type" value="logout">
@@ -222,7 +222,7 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
             </div>
             <div class="align-itensUsuario">
                 <img src="assets/images/Database.png" alt="icone carrinho de pedidos">
-                <a href="pages/eventos.html">
+                <a href="pages/alterar-dados.php">
                     <p>Alterar dados</p>
                 </a>
             </div>

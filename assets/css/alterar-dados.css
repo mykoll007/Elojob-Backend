@@ -4,6 +4,14 @@ main{
     justify-content: center;
     margin-top: 136px;
 }
+h4 {
+    color: white;
+    text-decoration: none;
+    font-family: poppins;
+    font-weight: 800;
+    font-size: 24px;
+    margin: 0;
+}
 
 section{
     background-color: #1D1C29;
@@ -37,6 +45,9 @@ section{
     display: flex;
     justify-content: center;
 }
+#align-btnEditar{
+    margin-bottom: 35px;
+}
 
 #btn-editar{
     display: flex;
@@ -58,7 +69,6 @@ section{
 form{
     display: grid;
     justify-content: center;
-    margin-top: 35px;
 }
 
 label{

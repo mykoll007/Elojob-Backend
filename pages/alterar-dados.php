@@ -1,10 +1,14 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EloJob XCrONOS | Termos de Uso</title>
+    <title>EloJob XCrONOS | Alterar Dados</title>
 
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/alterar-dados.css">
@@ -13,17 +17,17 @@
         <!--Icon baixada gratuitamente pela Flaticon-->
         <link rel="icon" href="../assets/images/gladiador.png">
 
-    <meta name="description" content="Leia os termos de uso da EloJob XCrONOS e saiba como utilizamos nossos serviços de forma segura.">
-    <meta name="author" content="EloJob XCrONOS">
-    <meta name="keywords" content="termos de uso, EloJob, serviços de LOL, condições de uso, regulamentação, acordos">
-
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:title" content="Termos de Uso - EloJob XCrONOS">
-    <meta property="og:site_name" content="EloJob XCrONOS">
-    <meta property="og:description" content="Entenda os termos e condições para utilizar os serviços da EloJob XCrONOS.">
-    <meta property="og:image" content="https://www.elojobxcronos.com/assets/images/logoCronos.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://elojobxcronos.com/termos-de-uso">
+        <meta name="description" content="Altere suas informações de conta na EloJob XCrONOS de forma segura e rápida.">
+        <meta name="author" content="EloJob XCrONOS">
+        <meta name="keywords" content="alterar dados, conta EloJob, atualização de informações, serviços de LOL">
+        
+        <meta property="og:locale" content="pt_BR">
+        <meta property="og:title" content="Alterar Dados - EloJob XCrONOS">
+        <meta property="og:site_name" content="EloJob XCrONOS">
+        <meta property="og:description" content="Atualize suas informações de conta na EloJob XCrONOS.">
+        <meta property="og:image" content="https://www.elojobxcronos.com/assets/images/logoCronos.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://elojobxcronos.com/alterar-dados">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,24 +40,78 @@
 <body>
     <header>
         <div id="align-logoHambu">
-            <a href="../index.html"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-        <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
-            menu
+            <a href="index.html"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
+            <span id="IconMenu" class="material-symbols-outlined">
+                menu
             </span>
-        </div>    
+        </div>
         <nav id="itens">
             <ul>
-                <li><a href="../index.html">INÍCIO</a></li>
-                <li><a href="elojob.html">ELOJOB</a></li>
-                <li><a href="duoboost.html">DUOBOOST</a></li>
-                <li><a href="md5.html">MD5</a></li>
-                <li><a href="coach.html">COACH</a></li>
+                <li><a href="../index.php">INÍCIO</a></li>
+                <li><a href="pages/elojob.html">ELOJOB</a></li>
+                <li><a href="pages/duoboost.html">DUOBOOST</a></li>
+                <li><a href="pages/md5.html">MD5</a></li>
+                <li><a href="pages/coach.html">COACH</a></li>
+                <li><a href="pages/eventos.html">EVENTOS</a></li>
+
+                <?php if(isset($_SESSION['token'])) : ?>
+                <div class="itens-logado">
+                    <li><a href="pages/eventos.html">Meus Pedidos</a></li>
+                    <li><a href="pages/alterar-dados.php">Alterar dados</a></li>
+                    <li>
+                        <form action="../elojob-backend/service/AuthService.php" method="post">
+                            <input type="hidden" name="type" value="logout">
+                            <button type="submit">
+                                Sair
+                            </button>
+                        </form>
+                    </li>
+                    <div>
+                        <?php endif; ?>
             </ul>
         </nav>
-        <a href="https://wa.me/5511991983299?text=Olá%20preciso%20de%20ajuda%20vim%20pela%20ElojobXCronos."
-        target="_blank" class="login-btn" id="btnIniciar">
-        <img src="../assets/images/Whatsapp-icon.png" alt="icone do whatsapp">FALE CONOSCO
-     </a>
+        <?php if(isset($_SESSION['token'])) : ?>
+        <div class="avatar">
+            <img src="../assets/images/usuario.png" alt="icone usuario">
+        </div>
+
+        <!--Parte Usuario-->
+
+        <div class="content-usuario">
+            <img src="../assets/images/usuario.png" alt="icone usuario">
+            <h4>
+                <?php echo $_SESSION['nome']; ?>
+            </h4>
+            <p class="email">
+                <?php echo $_SESSION['email']; ?>
+            </p>
+            <div class="align-itensUsuario">
+                <img src="../assets/images/carrinho.png" alt="icone carrinho de pedidos">
+                <a href="#">
+                    <p>Meus Pedidos</p>
+                </a>
+            </div>
+            <div class="align-itensUsuario">
+                <img src="../assets/images/Database.png" alt="icone carrinho de pedidos">
+                <a href="#">
+                    <p>Alterar dados</p>
+                </a>
+            </div>
+
+            <form action="../elojob-backend/service/AuthService.php" method="post">
+                <input type="hidden" name="type" value="logout">
+                <button class="align-itensUsuario" id="logout" type="submit">
+                    <img src="../assets/images/Logout.png" alt="ícone de logout">
+                    Sair
+                </button>
+            </form>
+        </div>
+
+        <?php else : ?>
+        <a href="index.php" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
+            INICIAR SESSÃO
+        </a>
+        <?php endif; ?>
     </header>
 
     <main>

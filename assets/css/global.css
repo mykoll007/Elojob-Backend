@@ -134,6 +134,9 @@
   margin: 0;
   margin-bottom: 3px;
 }
+#formLogout{
+  margin-top: 0;
+}
 #logout{
   width: 238px;
   cursor: pointer;
