@@ -131,3 +131,72 @@ margin-top: 5px;
     margin-left: 10px;
     cursor: pointer;
 }
+
+#modalMensagemSenha{
+    display: none;
+    justify-content: center;
+     position: fixed;  
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  #mensagem-senha{
+    background-color: black;
+    margin: auto; 
+    border: 1px solid white;
+    border-radius: 16px;
+    width: 357px;
+  
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  #mensagem-senha img
+{
+  width: 131px;
+}
+#mensagem-senha h2{
+    font-family: 'Poppins';
+    color: green;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+  .align-btn{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .align-btn button{
+    cursor: pointer;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    height: 42px;
+    width: 208px;
+    font-size: 15px;
+    font-family: poppins;
+    border-radius: 16px;
+    font-weight: 500;
+    border: 1px solid white;
+  }
+  #fecharMensagem{
+    color: black;
+    width: 122px;
+    text-align: center;
+    margin-top: 14px;
+    margin: 8px 0;
+    height: 40px;
+    border-radius: 24px;
+  }
+  .close {
+    color: white;
+    font-size: 35px;
+    margin: 0;
+    margin-right: 22px;
+    text-align: end;
+    height: 19px;
+    cursor: pointer;
+  }

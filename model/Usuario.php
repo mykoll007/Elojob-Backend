@@ -8,17 +8,19 @@ class Usuario
     private $nome;
     private $senha;
     private $email;
+    private $telefone;
     private $token;
     private $data_cadastro;
     private $codigo_verificacao;
 
     // Criar método construtor com as propriedades obrigatórias a um usuário
-    public function __construct($id, $nome, $senha, $email, $token, $data_cadastro, $codigo_verificacao = null)
+    public function __construct($id, $nome, $senha, $email, $telefone = null , $token, $data_cadastro, $codigo_verificacao = null)
     {
         $this->id = $id;
         $this->nome = $nome;
         $this->senha = $senha;
         $this->email = $email;
+        $this->telefone = $telefone;
         $this->token = $token;   
         $this->data_cadastro = $data_cadastro;
         $this->codigo_verificacao = $codigo_verificacao;     
@@ -40,6 +42,9 @@ class Usuario
     public function getEmail() {
         return $this->email;
     }
+    public function getTelefone() {
+        return $this->telefone;
+    }
 
     public function getToken() {
         return $this->token;
@@ -54,23 +59,26 @@ class Usuario
 
     // Criar setters
     public function setNome($nome) {
-        $this->nome = $nome; // Corrigido para usar $this->nome
+        $this->nome = $nome; 
     }
 
     public function setSenha($senha) {
-        $this->senha = $senha; // Corrigido para usar $this->senha
+        $this->senha = $senha; 
     }
 
     public function setEmail($email) {
-        $this->email = $email; // Corrigido para usar $this->email
+        $this->email = $email; 
+    }
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
     }
 
     public function setToken($token) {
-        $this->token = $token; // Corrigido para usar $this->token
+        $this->token = $token; 
     }
 
     public function setData($data_cadastro) {
-        $this->data_cadastro = $data_cadastro; // Corrigido para usar $this->data_cadastro
+        $this->data_cadastro = $data_cadastro; 
     }
 
     // Opcionalmente, criar o toString() da classe

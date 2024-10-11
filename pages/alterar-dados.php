@@ -1,5 +1,60 @@
 <?php
 session_start();
+require_once '../dao/UsuarioDAO.php';
+require_once '../model/Usuario.php';
+
+// Verifique se o usuário está logado e os dados estão na sessão
+if (!isset($_SESSION['email'])) {
+    // Redirecionar para a página de login se o usuário não estiver logado
+    header('Location: ../index.php');
+    exit();
+}
+
+$usuarioDAO = new UsuarioDAO();
+$email = $_SESSION['email'];
+
+// Buscar o usuário pelo email
+if ($email) {
+    $usuario = $usuarioDAO->getByEmail($email);
+} else {
+    $usuario = null; // Se não houver email na sessão, defina como nulo
+}
+
+// Mensagem para senha incorreta e função para ja abrir os inputs quando erra
+if (isset($_GET['erro'])) {
+    $erro = $_GET['erro'];
+if($erro == 'senha_incorreta'){
+    echo "<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        function enableInputs() {
+        const inputs = document.querySelectorAll('input');
+        
+        inputs.forEach(input => {
+            input.removeAttribute('readonly');
+            input.style.opacity = '100%';
+        });
+    }
+        enableInputs();
+        document.getElementById('senhaInvalida').innerText = 'Sua senha está incorreta.';
+    });
+</script>";
+    }
+}
+
+if(isset($_GET['sucesso'])){
+    $sucesso = $_GET['sucesso'];
+
+    if($sucesso == 'alteracoes_salvas'){
+        echo "<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        document.getElementById('modalMensagemSenha').style.display = 'flex';
+    });
+        </script>";
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +114,7 @@ session_start();
                     <li><a href="pages/eventos.html">Meus Pedidos</a></li>
                     <li><a href="pages/alterar-dados.php">Alterar dados</a></li>
                     <li>
-                        <form action="../elojob-backend/service/AuthService.php" method="post">
+                        <form action="../service/AuthService.php" method="post">
                             <input type="hidden" name="type" value="logout">
                             <button type="submit">
                                 Sair
@@ -98,7 +153,7 @@ session_start();
                 </a>
             </div>
 
-            <form action="../elojob-backend/service/AuthService.php" method="post">
+            <form action="../service/AuthService.php" method="post">
                 <input type="hidden" name="type" value="logout">
                 <button class="align-itensUsuario" id="logout" type="submit">
                     <img src="../assets/images/Logout.png" alt="ícone de logout">
@@ -120,29 +175,32 @@ session_start();
                 <div id="align-user">
                     <img src="../assets/images/UserEditar.png" alt="icone do usuario">
                     <div id="user">
-                    <h2>Mykoll Daniel</h2>
+                    <h2><?php echo htmlspecialchars($usuario->getNome()); ?></h2>
                     <p>Forjado na arena desde <b>agosto de 2024</b></p>
                     </div>
                 </div>
                 <div id="align-btnEditar">
                 <button id="btn-editar">EDITAR <img src="../assets/images/Edit.png" alt="icone do editar"></button>
                 </div>
+                <p id="senhaInvalida" style="color: red"></p>
 
-                <form action="" method="POST">
+                <form action="../service/AuthService.php" method="POST">
+                <input type="hidden" name="type" value="alterar_dados">
+
                     <label for="usuario">Usuário</label>
-                    <input type="text" id="usuario" name="usuario" value="Mykoll Daniel" readonly required>
+                    <input type="text" id="nome" name="nome" value="<?php echo $usuario->getNome(); ?>" readonly required>
                 
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="mykoll.daniel@gmail.com" readonly required>
+                    <input type="email" id="email" name="email" value="<?php echo $usuario->getEmail(); ?>" readonly required>
                 
                     <label for="telefone">Telefone</label>
-                    <input type="text" id="telefone" name="telefone" readonly>
+                    <input type="text" id="telefone" name="telefone" value="<?php echo $usuario->getTelefone(); ?>" readonly>
                 
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" readonly required>
+                    <label for="senha_atual">Senha</label>
+                    <input type="password" id="senha_atual" name="senha_atual" readonly required>
 
                     <div id="align-btnSalvar">
-                    <button type="" id="btn-salvar">SALVAR ALTERAÇÕES <img src="../assets/images/Salvar.png" alt="icone do salvar"></button>
+                    <button type="submit" id="btn-salvar">SALVAR ALTERAÇÕES <img src="../assets/images/Salvar.png" alt="icone do salvar"></button>
                     </div>
 
                     <div id="align-btnExcluir">
@@ -151,6 +209,18 @@ session_start();
                 </form>    
             </div>
         </section>
+
+            <!--Modal Mensagem Dados Alterados-->
+        <div id="modalMensagemSenha">
+            <div id="mensagem-senha">
+                <img src="../assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>Dados Alterados com Sucesso!</h2>
+                <div class="align-btn">
+                        <button class="close" id="fecharMensagem" onclick="closeModals()">FECHAR</button>
+                    </div>
+            </div>
+        </div>
+
     </main>
 
     <footer>

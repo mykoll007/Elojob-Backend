@@ -501,7 +501,7 @@ h4 {
 
 #modal-content1 h2,#modal-content2 h2, 
 #modal-content3 h2, #modal-content4 h2,
-#modal-content5 h2, #mensagem-senha h2{
+#modal-content5 h2{
   font-size: 21px;
   font-family: 'Poppins';
   color: white;
@@ -510,9 +510,12 @@ h4 {
   margin-bottom: 10px;
 }
 #mensagem-senha h2{
+  font-family: 'Poppins';
   color: green;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 16px;
+  margin-top: 3px;
+  margin-bottom: 10px;
 }
 #container-codigo{
   display: flex;

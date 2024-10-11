@@ -40,7 +40,12 @@ class UsuarioDAO{
 
             $stmt->execute([':email' => $email]);
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $usuario ? new Usuario($usuario['id_cadastro'], $usuario['nome'], $usuario['senha'], $usuario['email'], $usuario['token'], $usuario['data_cadastro']) : null;
+
+            // Verifica se o campo 'telefone' existe nos dados retornados
+            $telefone = isset($usuario['telefone']) ? $usuario['telefone'] : null;
+
+
+            return $usuario ? new Usuario($usuario['id_cadastro'], $usuario['nome'], $usuario['senha'], $usuario['email'],$telefone, $usuario['token'], $usuario['data_cadastro']) : null;
         } catch (PDOException $e) {
             return null;
         }
@@ -118,6 +123,25 @@ class UsuarioDAO{
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+
+    public function update($usuario) {
+        try {
+            $sql = "UPDATE usuarios SET nome = :nome, email = :email, telefone = :telefone WHERE id_cadastro = :id";
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->execute([
+                ':nome' => $usuario->getNome(),
+                ':email' => $usuario->getEmail(),
+                ':telefone' => $usuario->getTelefone(),
+                ':id' => $usuario->getId()
+            ]);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
+
 
 ?>

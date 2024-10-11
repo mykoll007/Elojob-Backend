@@ -29,6 +29,9 @@ switch($type)
     case 'redefinir' :
         handleRedefinirSenha();
         break;
+    case "alterar_dados" :
+        handleAlterarDados();
+        break;
     default:
         echo "Ação inválida";
         break;
@@ -73,7 +76,7 @@ function handlerRegistration()
     $data_cadastro = date('Y-m-d H:i:s');
 
     // Criação do Usuário no Banco de Dados
-    $usuario = new Usuario(null, $nome, $hashed_password, $email, $token, $data_cadastro);
+    $usuario = new Usuario(null, $nome, $hashed_password, $email, null, $token, $data_cadastro);
     $usuarioDAO = new UsuarioDAO();
 
     if($usuarioDAO->getByEmail($email))
@@ -236,6 +239,48 @@ function handleRedefinirSenha()
         exit(); // Finaliza o script para garantir o redirecionamento
     } else {
         echo "Código de verificação inválido ou expirado!";
+    }
+}
+
+
+//----------------Atualizar Alterar Dados------------
+
+function handleAlterarDados() {
+    $nome = filter_input(INPUT_POST, "nome");
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $telefone = filter_input(INPUT_POST, "telefone");
+    $senhaAtual = filter_input(INPUT_POST, "senha_atual");
+
+    $usuarioDAO = new UsuarioDAO();
+
+    // Recupera o usuário logado via sessão
+    $usuario = $usuarioDAO->getByEmail($_SESSION['email']);
+
+    if ($usuario) {
+        // Verifica se a senha atual está correta
+        if (password_verify($senhaAtual, $usuario->getSenha())) {
+            // Atualiza os dados do usuário
+            $usuario->setNome($nome);
+            $usuario->setEmail($email);
+           
+            // Atualiza o telefone apenas se foi informado
+            if (!empty($telefone)) {
+            $usuario->setTelefone($telefone);
+            }
+
+            // Atualizar no banco de dados
+            $usuarioDAO->update($usuario);
+            
+            // Atualiza a sessão com as novas informações
+            $_SESSION['email'] = $email;
+            $_SESSION['nome'] = $nome;
+
+            header("Location: ../pages/alterar-dados.php?sucesso=alteracoes_salvas");
+        } else {
+            header("Location: ../pages/alterar-dados.php?erro=senha_incorreta");
+        }
+    } else {
+        header("Location: ../index.php?erro=usuario_nao_encontrado");
     }
 }
 
