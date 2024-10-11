@@ -263,9 +263,11 @@ function handleAlterarDados() {
             $usuario->setNome($nome);
             $usuario->setEmail($email);
            
-            // Atualiza o telefone apenas se foi informado
+            // Atualiza o telefone apenas se foi informado, se não fica como nulo
             if (!empty($telefone)) {
             $usuario->setTelefone($telefone);
+            } else{
+                $usuario->setTelefone('');
             }
 
             // Atualizar no banco de dados
