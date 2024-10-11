@@ -37,7 +37,30 @@ switch($type)
         break;
 }
 
+function formatarDataCadastro($dataCadastro) {
+    // Traduz o nome dos meses para português
+    $meses = [
+        'January' => 'janeiro',
+        'February' => 'fevereiro',
+        'March' => 'março',
+        'April' => 'abril',
+        'May' => 'maio',
+        'June' => 'junho',
+        'July' => 'julho',
+        'August' => 'agosto',
+        'September' => 'setembro',
+        'October' => 'outubro',
+        'November' => 'novembro',
+        'December' => 'dezembro'
+    ];
 
+    // Obtém o mês e o ano da data de cadastro
+    $mesTraduzido = $meses[date('F', strtotime($dataCadastro))];
+    $ano = date('Y', strtotime($dataCadastro));
+
+    // Retorna a data formatada
+    return "{$mesTraduzido} de {$ano}";
+}
 
 function handlerRegistration()
 {
@@ -285,5 +308,7 @@ function handleAlterarDados() {
         header("Location: ../index.php?erro=usuario_nao_encontrado");
     }
 }
+
+
 
 ?>

@@ -20,7 +20,9 @@ if ($email) {
     $usuario = null; // Se não houver email na sessão, defina como nulo
 }
 
-// Mensagem para senha incorreta e função para ja abrir os inputs quando erra
+$dataCadastroFormatada = $usuarioDAO->getDataCadastroFormatada($_SESSION['email']);
+
+// Mensagem para senha incorreta quando envia o formulario alterar dados e função para ja abrir os inputs quando erra
 if (isset($_GET['erro'])) {
     $erro = $_GET['erro'];
 if($erro == 'senha_incorreta'){
@@ -176,7 +178,7 @@ if(isset($_GET['sucesso'])){
                     <img src="../assets/images/UserEditar.png" alt="icone do usuario">
                     <div id="user">
                     <h2><?php echo htmlspecialchars($usuario->getNome()); ?></h2>
-                    <p>Forjado na arena desde <b>agosto de 2024</b></p>
+                    <p>Forjado na arena desde <b><?php echo $dataCadastroFormatada; ?></b></p>
                     </div>
                 </div>
                 <div id="align-btnEditar">

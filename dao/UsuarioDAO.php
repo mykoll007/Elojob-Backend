@@ -21,7 +21,7 @@ class UsuarioDAO{
             ':senha' => $usuario->getSenha(),
             ':email' => $usuario->getEmail(),
             ':token' => $usuario->getToken(),
-            ':data_cadastro' => $usuario->getData()
+            ':data_cadastro' => $data_cadastro
         ]);
 
             return true;
@@ -140,6 +140,38 @@ class UsuarioDAO{
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    public function getDataCadastroFormatada($email) {
+        $usuario = $this->getByEmail($email); // Recupera o usuário pelo email
+        if ($usuario) {
+            $dataCadastroFormatada = $usuario->getDataCadastro(); // Obtém a data de cadastro
+            return $this->formatarDataCadastro($dataCadastroFormatada); // Retorna a data formatada
+        }
+        return null; 
+    }
+
+    // Função para formatar a data de cadastro
+    private function formatarDataCadastro($dataCadastroFormatada) {
+        $meses = [
+            'January' => 'janeiro',
+            'February' => 'fevereiro',
+            'March' => 'março',
+            'April' => 'abril',
+            'May' => 'maio',
+            'June' => 'junho',
+            'July' => 'julho',
+            'August' => 'agosto',
+            'September' => 'setembro',
+            'October' => 'outubro',
+            'November' => 'novembro',
+            'December' => 'dezembro'
+        ];
+
+        $mesTraduzido = $meses[date('F', strtotime($dataCadastroFormatada))];
+        $ano = date('Y', strtotime($dataCadastroFormatada));
+
+        return "{$mesTraduzido} de {$ano}";
     }
 }
 

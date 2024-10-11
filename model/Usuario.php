@@ -50,7 +50,7 @@ class Usuario
         return $this->token;
     }
 
-    public function getData() {
+    public function getDataCadastro() {
         return $this->data_cadastro;
     }
     public function getByCodigoVerificacao() {
