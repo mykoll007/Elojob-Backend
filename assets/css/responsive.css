@@ -11,7 +11,7 @@
         padding-left: 102px;
     }
     header ul{
-        display: block;
+        display: inline;
     }
     nav{
         padding-top: 0;
@@ -24,7 +24,7 @@
         display: none;
         max-height: 247px;
     }
-    #itens.active {
+    #itens.logado {
         height: 247px; /* altura quando logado */
     }
 
@@ -33,7 +33,6 @@
     }
     #btnIniciar{
         display: none;
-        margin-top: 123px;
         margin-bottom: 10px;
     }
     #IconMenu{

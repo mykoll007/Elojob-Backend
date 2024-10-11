@@ -57,15 +57,6 @@
   nav {
     padding-top: 49px;
   }
-  /* #itens a{
-        border: 1px solid #282d30;
-    border-radius: 13px;
-    width: 57px;
-    text-align: center;
-    display: inline-block;
-    background-color: #282d30;
-    padding: 9px;
-  } */
   .login-btn {
     display: flex; /*Depois alterar de novo */
     justify-content: space-evenly;

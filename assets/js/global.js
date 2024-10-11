@@ -13,9 +13,6 @@ function clickMenu() {
   }
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   document.getElementById('itens').classList.toggle('active', <?php echo isset($_SESSION['token']) ? 'true' : 'false'; ?>);
-// });
 
 document.addEventListener ('DOMContentLoaded', function() {
   const avatar = document.querySelector('.avatar');
