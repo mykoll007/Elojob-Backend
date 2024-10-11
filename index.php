@@ -116,9 +116,22 @@ if (isset($_GET['codigo_verificacao'])) {
 if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
     echo "<script>
     document.addEventListener('DOMContentLoaded', function () {
-        openModalMensagem(); // Função para abrir o modal da mensagem
+        openModalMensagem(); 
     });
 </script>";
+}
+// Exibir mensagem de sucesso ao excluir a conta - *Modal Mensagem Conta Excluida*
+if (isset($_GET['sucesso'])) {
+    $sucesso = $_GET['sucesso'];
+
+    if($sucesso == 'conta_excluida'){
+    echo "<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('modalMensagemExcluido').style.display = 'flex';
+        document.getElementById('modalMensagemExcluido').style.position = 'fixed';
+    });
+</script>";
+    }
 }
 
 ?>
@@ -710,6 +723,17 @@ if (isset($_GET['senha_redefinida']) && $_GET['senha_redefinida'] == 1) {
                 <h2>Senha Redefinida com Sucesso!</h2>
                 <div class="align-btn">
                         <button class="close" id="fecharMensagem">FECHAR</button>
+                    </div>
+            </div>
+        </div>
+
+        <!--Modal Mensagem Conta Excluida-->
+        <div id="modalMensagemExcluido">
+            <div id="mensagem-excluido">
+                <img src="assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>Conta Excluida com sucesso!</h2>
+                <div class="align-btn">
+                        <button class="close" id="exitMensagem" onclick="closeModals()">FECHAR</button>
                     </div>
             </div>
         </div>

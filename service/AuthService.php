@@ -32,6 +32,9 @@ switch($type)
     case "alterar_dados" :
         handleAlterarDados();
         break;
+    case "excluir_conta":
+        handleExcluirConta();
+        break;
     default:
         echo "Ação inválida";
         break;
@@ -306,6 +309,29 @@ function handleAlterarDados() {
         }
     } else {
         header("Location: ../index.php?erro=usuario_nao_encontrado");
+    }
+}
+
+//----------------Excluir Conta------------
+function handleExcluirConta() {
+    // Verifica se o usuário está logado
+    if (!isset($_SESSION['email'])) {
+        header("Location: ../index.php?erro=usuario_nao_logado");
+        exit();
+    }
+
+    $usuarioDAO = new UsuarioDAO();
+    $email = $_SESSION['email']; // Obtém o email do usuário logado
+
+
+    if ($usuarioDAO->excluirContaPorEmail($email)) {
+    
+        session_destroy(); // Destrói a sessão do usuário
+        header("Location: ../index.php?sucesso=conta_excluida");
+        exit();
+    } else {
+        // Lidar com erro na exclusão
+        header("Location: ../index.php?erro=erro_ao_excluir_conta");
     }
 }
 

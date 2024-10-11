@@ -460,6 +460,17 @@ h4 {
   height: 100%; 
   background-color: rgba(0, 0, 0, 0.5);
 }
+#modalMensagemExcluido{
+  display: none;
+  justify-content: center;
+  /* position: fixed;  */
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 
 .close {
@@ -481,7 +492,7 @@ h4 {
   text-align: center;
   padding-bottom: 10px;
 }
-#modal-content2, #modal-content3, #modal-content4, #modal-content5, #mensagem-senha{
+#modal-content2, #modal-content3, #modal-content4, #modal-content5, #mensagem-senha, #mensagem-excluido{
   background-color: black;
   margin: auto; 
   border: 1px solid white;
@@ -494,7 +505,8 @@ h4 {
 
 #modal-content1 img, #modal-content2 img, 
 #modal-content3 img, #modal-content4 img, 
-#modal-content5 img, #mensagem-senha img
+#modal-content5 img, #mensagem-senha img,
+#mensagm-excluido img
 {
   width: 131px;
 }
@@ -509,10 +521,10 @@ h4 {
   margin-top: 3px;
   margin-bottom: 10px;
 }
-#mensagem-senha h2{
+#mensagem-senha h2, #mensagem-excluido h2{
   font-family: 'Poppins';
   color: green;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 16px;
   margin-top: 3px;
   margin-bottom: 10px;
@@ -579,7 +591,7 @@ input{
   font-weight: 500;
   border: 1px solid white;
 }
-#fecharMensagem{
+#fecharMensagem, #exitMensagem{
   color: black;
   width: 122px;
   text-align: center;

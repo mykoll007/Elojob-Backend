@@ -204,11 +204,10 @@ if(isset($_GET['sucesso'])){
                     <div id="align-btnSalvar">
                     <button type="submit" id="btn-salvar">SALVAR ALTERAÇÕES <img src="../assets/images/Salvar.png" alt="icone do salvar"></button>
                     </div>
-
-                    <div id="align-btnExcluir">
-                    <button type="" id="btn-excluir" formaction="">EXCLUIR SUA CONTA <img src="../assets/images/Lixeira.png" alt="icone de excluir conta"></button>
-                    </div>
-                </form>    
+                </form>   
+                <div id="align-btnExcluir">
+                    <button type="" id="btn-excluir" onclick="openModalExcluir()">EXCLUIR SUA CONTA <img src="../assets/images/Lixeira.png" alt="icone de excluir conta"></button>
+                </div> 
             </div>
         </section>
 
@@ -218,10 +217,33 @@ if(isset($_GET['sucesso'])){
                 <img src="../assets/images/logoCronos.png" alt="logo Cronos">
                 <h2>Dados Alterados com Sucesso!</h2>
                 <div class="align-btn">
-                        <button class="close" id="fecharMensagem" onclick="closeModals()">FECHAR</button>
+                        <button class="close" class="fecharMensagem" onclick="closeModals()">FECHAR</button>
                     </div>
             </div>
         </div>
+
+            <!--Modal Mensagem Excluir a Conta-->
+         <div id="modalMensagemExcluir">
+            <div id="mensagem-excluir">
+                <img src="../assets/images/logoCronos.png" alt="logo Cronos">
+                <h2>Você deseja excluir sua conta?</h2>
+                <p>Atenção essa ação será irreversível!</p>
+            <div id="align-buttons">
+                <div class="align-btn">
+                        <button class="close" class="fecharMensagem" onclick="closeModals()">CANCELAR</button>
+                    </div>
+                <div class="align-btn">
+                <form action="../service/AuthService.php" method="post" id="formExcluirConta">
+                <input type="hidden" name="type" value="excluir_conta">
+                        <button class="close" class="excluir" type="submit" id="excluirConta">EXCLUIR
+                            <img src="../assets/images/Lixeira.png" alt="icone lixeira">
+                        </button>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    
 
     </main>
 

@@ -150,6 +150,16 @@ class UsuarioDAO{
         }
         return null; 
     }
+    public function excluirContaPorEmail($email) {
+        try {
+            $sql = "DELETE FROM usuarios WHERE email = :email";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            return true; 
+        } catch (PDOException $e) {
+            return false; 
+        }
+    }
 
     // Função para formatar a data de cadastro
     private function formatarDataCadastro($dataCadastroFormatada) {

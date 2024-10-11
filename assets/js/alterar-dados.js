@@ -18,6 +18,11 @@ document.getElementById('btn-editar').addEventListener('click', function(event) 
 //Fechar os modais
 function closeModals() {
     document.getElementById('modalMensagemSenha').style.display = 'none';
+    document.getElementById('modalMensagemExcluir').style.display = 'none';
+  }
+
+  function openModalExcluir(){
+    document.getElementById('modalMensagemExcluir').style.display = 'flex';
   }
 
 

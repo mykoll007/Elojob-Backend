@@ -147,6 +147,7 @@ const modalRecuperarSenha = document.getElementById('modalRecuperarSenha');
 const modalDigiteCodigo = document.getElementById('modalDigiteCodigo');
 const modalRenovaSenha = document.getElementById('modalRenovaSenha');
 const modalMensagemSenha = document.getElementById('modalMensagemSenha');
+const modalMensagemExcluido = document.getElementById('modalMensagemExcluido');
 
 // Função para fechar todos os modais
 function closeModals() {
@@ -156,6 +157,7 @@ function closeModals() {
   modalDigiteCodigo.style.display = 'none';
   modalRenovaSenha.style.display = 'none';
   modalMensagemSenha.style.display = 'none';
+  modalMensagemExcluido.style.display = 'none';
 }
 
 // Função para abrir o modal de iniciar sessão
@@ -189,6 +191,12 @@ function openModalMensagem(){
   closeModals();
   modalMensagemSenha.style.display = 'flex';
   modalMensagemSenha.style.position = 'fixed';
+}
+
+function openModalMensagemExcluido(){
+  closeModals();
+  modalMensagemExcluido.style.display = 'flex';
+  modalMensagemExcluido.style.position = 'fixed';
 }
 
 // Fechar modais ao clicar no "X"
