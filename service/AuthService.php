@@ -51,6 +51,13 @@ function handlerRegistration()
         return;
     }
 
+     // Verificar se a senha tem no mínimo 5 caracteres
+    if(strlen($password) < 5) {
+        // Redirecionar se a senha for muito curta
+        header("Location: ../index.php?erro=senha_curta");
+        return;
+        }
+
     if($password !== $confirm_password) {
         // echo "Senhas incompatíveis.";
         header("Location: ../index.php?erro=senhas_incompativeis");

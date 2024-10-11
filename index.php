@@ -44,9 +44,15 @@ if (isset($_GET['erro'])) {
                 openModalRegistrar(); // Função para abrir o modal de cadastro
             });
         </script>";
+    } elseif ($erro == 'senha_curta') {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('erroCadastrar').innerText = 'A senha deve ter pelo menos 5 caracteres.';
+                openModalRegistrar(); // Função para abrir o modal de cadastro
+            });
+        </script>";
     }
 }
-
 
 // Verifica se há erro de credenciais inválidas na URL - *Modal Login*
 if (isset($_GET['erroLogin']) && $_GET['erroLogin'] == 'credenciais_invalidas') {
