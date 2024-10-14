@@ -11,10 +11,14 @@ class UsuarioDAO{
     }
     public function create($usuario){
         try{
+
+            // Define o fuso horário para São Paulo
+            date_default_timezone_set('America/Sao_Paulo');
             $sql = "INSERT INTO usuarios (nome, senha, email, token, data_cadastro) 
             VALUES (:nome, :senha, :email, :token, :data_cadastro)";
             $stmt = $this->db->prepare($sql);
 
+            // Obtém a data e hora atuais no formato adequado
             $data_cadastro = date('Y-m-d H:i:s');
 
             $stmt->execute([':nome' => $usuario->getNome(),
@@ -45,7 +49,7 @@ class UsuarioDAO{
             $telefone = isset($usuario['telefone']) ? $usuario['telefone'] : null;
 
 
-            return $usuario ? new Usuario($usuario['id_cadastro'], $usuario['nome'], $usuario['senha'], $usuario['email'],$telefone, $usuario['token'], $usuario['data_cadastro']) : null;
+            return $usuario ? new Usuario($usuario['id_cadastro'], $usuario['nome'], $usuario['senha'], $usuario['email'], $usuario['token'], $usuario['data_cadastro'], $usuario['telefone'] ?? null) : null;
         } catch (PDOException $e) {
             return null;
         }
@@ -146,10 +150,12 @@ class UsuarioDAO{
         $usuario = $this->getByEmail($email); // Recupera o usuário pelo email
         if ($usuario) {
             $dataCadastroFormatada = $usuario->getDataCadastro(); // Obtém a data de cadastro
+            var_dump($dataCadastroFormatada); // Adiciona um var_dump para verificar o valor
             return $this->formatarDataCadastro($dataCadastroFormatada); // Retorna a data formatada
         }
         return null; 
     }
+    
     public function excluirContaPorEmail($email) {
         try {
             $sql = "DELETE FROM usuarios WHERE email = :email";
@@ -161,29 +167,44 @@ class UsuarioDAO{
         }
     }
 
-    // Função para formatar a data de cadastro
     private function formatarDataCadastro($dataCadastroFormatada) {
-        $meses = [
-            'January' => 'janeiro',
-            'February' => 'fevereiro',
-            'March' => 'março',
-            'April' => 'abril',
-            'May' => 'maio',
-            'June' => 'junho',
-            'July' => 'julho',
-            'August' => 'agosto',
-            'September' => 'setembro',
-            'October' => 'outubro',
-            'November' => 'novembro',
-            'December' => 'dezembro'
-        ];
-
-        $mesTraduzido = $meses[date('F', strtotime($dataCadastroFormatada))];
-        $ano = date('Y', strtotime($dataCadastroFormatada));
-
-        return "{$mesTraduzido} de {$ano}";
+        // Primeiro, garante que a data seja convertida corretamente usando strtotime
+        $timestamp = strtotime($dataCadastroFormatada);
+        
+        // Verifica se o timestamp é válido
+        if ($timestamp !== false) {
+            $meses = [
+                '01' => 'janeiro',
+                '02' => 'fevereiro',
+                '03' => 'março',
+                '04' => 'abril',
+                '05' => 'maio',
+                '06' => 'junho',
+                '07' => 'julho',
+                '08' => 'agosto',
+                '09' => 'setembro',
+                '10' => 'outubro',
+                '11' => 'novembro',
+                '12' => 'dezembro'
+            ];
+    
+            // Extrai o mês e o ano a partir do timestamp
+            $mes = date('m', $timestamp);
+            $ano = date('Y', $timestamp);
+    
+            // Traduz o mês para português
+            $mesTraduzido = $meses[$mes];
+    
+            // Retorna a data formatada
+            return "{$mesTraduzido} de {$ano}";
+        } else {
+            return "Data inválida";
+        }
     }
+    
+
 }
+    
 
 
 ?>

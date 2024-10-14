@@ -14,7 +14,7 @@ class Usuario
     private $codigo_verificacao;
 
     // Criar método construtor com as propriedades obrigatórias a um usuário
-    public function __construct($id, $nome, $senha, $email, $token, $data_cadastro, $codigo_verificacao = null)
+    public function __construct($id, $nome, $senha, $email, $token, $data_cadastro, $telefone = null, $codigo_verificacao = null)
     {
         $this->id = $id;
         $this->nome = $nome;
@@ -22,6 +22,7 @@ class Usuario
         $this->email = $email;
         $this->token = $token;   
         $this->data_cadastro = $data_cadastro;
+        $this->telefone = $telefone;
         $this->codigo_verificacao = $codigo_verificacao;     
     }
 
@@ -51,6 +52,7 @@ class Usuario
 
     public function getDataCadastro() {
         return $this->data_cadastro;
+        
     }
     public function getByCodigoVerificacao() {
         return $this->codigo_verificacao;

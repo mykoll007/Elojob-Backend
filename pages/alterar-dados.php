@@ -1,26 +1,28 @@
 <?php
-session_start();
-require_once '../dao/UsuarioDAO.php';
-require_once '../model/Usuario.php';
+    session_start();
+    require_once '../dao/UsuarioDAO.php';
+    require_once '../model/Usuario.php';
 
-// Verifique se o usuário está logado e os dados estão na sessão
-if (!isset($_SESSION['email'])) {
-    // Redirecionar para a página de login se o usuário não estiver logado
-    header('Location: ../index.php');
-    exit();
-}
 
-$usuarioDAO = new UsuarioDAO();
-$email = $_SESSION['email'];
 
-// Buscar o usuário pelo email
-if ($email) {
-    $usuario = $usuarioDAO->getByEmail($email);
-} else {
-    $usuario = null; // Se não houver email na sessão, defina como nulo
-}
+    // Verifique se o usuário está logado e os dados estão na sessão
+    if (!isset($_SESSION['email'])) {
+        // Redirecionar para a página de login se o usuário não estiver logado
+        header('Location: ../index.php');
+        exit();
+    }
 
-$dataCadastroFormatada = $usuarioDAO->getDataCadastroFormatada($_SESSION['email']);
+    $usuarioDAO = new UsuarioDAO();
+    $email = $_SESSION['email'];
+    $dataCadastroFormatada = $usuarioDAO->getDataCadastroFormatada($_SESSION['email']);
+
+    // Buscar o usuário pelo email
+    if ($email) {
+        $usuario = $usuarioDAO->getByEmail($email);
+    } else {
+        $usuario = null; // Se não houver email na sessão, defina como nulo
+    }
+
 
 // Mensagem para senha incorreta quando envia o formulario alterar dados e função para ja abrir os inputs quando erra
 if (isset($_GET['erro'])) {
