@@ -65,7 +65,8 @@ require_once '../model/Usuario.php';
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
-                    <li><a href="meus-pedidos.php">Meus Pedidos</a></li>
+                    <!-- Meus Pedidos Em breve -->
+                    <!-- <li><a href="meus-pedidos.php">Meus Pedidos</a></li> -->
                     <li><a href="alterar-dados.php">Alterar dados</a></li>
                     <li>
                         <form action="../service/AuthService.php" method="post">
@@ -94,12 +95,14 @@ require_once '../model/Usuario.php';
             <p class="email">
                 <?php echo $_SESSION['email']; ?>
             </p>
-            <div class="align-itensUsuario">
+            <!-- Meus Pedidos Em breve -->
+             
+            <!-- <div class="align-itensUsuario">
                 <img src="../assets/images/carrinho.png" alt="icone carrinho de pedidos">
                 <a href="meus-pedidos.php">
                     <p>Meus Pedidos</p>
                 </a>
-            </div>
+            </div> -->
             <div class="align-itensUsuario">
                 <img src="../assets/images/Database.png" alt="icone carrinho de pedidos">
                 <a href="alterar-dados.php">
