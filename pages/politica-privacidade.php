@@ -50,7 +50,7 @@ require_once '../model/Usuario.php';
 <header>
         <div id="align-logoHambu">
             <a href="../index.php"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-            <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
+            <span id="IconMenu" class="material-symbols-outlined">
                 menu
             </span>
         </div>

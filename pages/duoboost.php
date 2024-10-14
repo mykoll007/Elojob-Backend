@@ -49,7 +49,7 @@ require_once '../model/Usuario.php';
 <header>
         <div id="align-logoHambu">
             <a href="../index.php"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-            <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
+            <span id="IconMenu" class="material-symbols-outlined">
                 menu
             </span>
         </div>
@@ -122,7 +122,7 @@ require_once '../model/Usuario.php';
         <?php else : ?>
             <form action="../service/AuthService.php" method="post">
         <input type="hidden" name="type" value="login_index">
-        <button type="submit" class="login-btn" id="btnIniciar">
+        <button type="submit" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
             INICIAR SESSÃO
         </button>
     </form>
