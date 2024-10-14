@@ -766,7 +766,9 @@ if(isset($_GET['sucesso'])){
                             target="_blank">
                             <img src="assets/images/Whatsapp-icon.png" class="whatsapp-icon" alt="icone Whatsapp">
                         </a>
-                        <img src="assets/images/instagram-icon.png" class="instagram-icon" alt="icone Instagram">
+                        <a href="https://www.instagram.com/elojobxcronos" target="_blank">
+                            <img src="assets/images/instagram-icon.png" class="instagram-icon" alt="icone Instagram">
+                        </a>
                     </div>
                 </div>
             </div>
