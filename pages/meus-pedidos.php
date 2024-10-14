@@ -1,9 +1,25 @@
 <?php
+    session_start();
+    require_once '../dao/UsuarioDAO.php';
+    require_once '../model/Usuario.php';
 
-session_start();
-require_once '../dao/UsuarioDAO.php';
-require_once '../model/Usuario.php';
+      // Verifique se o usuário está logado e os dados estão na sessão
+      if (!isset($_SESSION['email'])) {
+        // Redirecionar para a página de login se o usuário não estiver logado
+        header('Location: ../index.php');
+        exit();
+    }
+    $usuarioDAO = new UsuarioDAO();
+    $email = $_SESSION['email'];
+    $dataCadastroFormatada = $usuarioDAO->getDataCadastroFormatada($_SESSION['email']);
 
+    
+    // Buscar o usuário pelo email
+    if ($email) {
+        $usuario = $usuarioDAO->getByEmail($email);
+    } else {
+        $usuario = null; // Se não houver email na sessão, defina como nulo
+    }
 
 ?>
 <!DOCTYPE html>
@@ -12,26 +28,26 @@ require_once '../model/Usuario.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EloJob XCrONOS | Termos de Uso</title>
+    <title>EloJob XCrONOS | Meus Pedidos</title>
 
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/politicas-termos.css">
+    <link rel="stylesheet" href="../assets/css/meus-pedidos.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
 
         <!--Icon baixada gratuitamente pela Flaticon-->
         <link rel="icon" href="../assets/images/gladiador.png">
 
-    <meta name="description" content="Leia os termos de uso da EloJob XCrONOS e saiba como utilizamos nossos serviços de forma segura.">
-    <meta name="author" content="EloJob XCrONOS">
-    <meta name="keywords" content="termos de uso, EloJob, serviços de LOL, condições de uso, regulamentação, acordos">
-
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:title" content="Termos de Uso - EloJob XCrONOS">
-    <meta property="og:site_name" content="EloJob XCrONOS">
-    <meta property="og:description" content="Entenda os termos e condições para utilizar os serviços da EloJob XCrONOS.">
-    <meta property="og:image" content="https://www.elojobxcronos.com/assets/images/logoCronos.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://elojobxcronos.com/termos-de-uso">
+        <meta name="description" content="Altere suas informações de conta na EloJob XCrONOS de forma segura e rápida.">
+        <meta name="author" content="EloJob XCrONOS">
+        <meta name="keywords" content="meus pedidos, conta EloJob, pedidos feitos, serviços de LOL">
+        
+        <meta property="og:locale" content="pt_BR">
+        <meta property="og:title" content="Meus Pedidos - EloJob XCrONOS">
+        <meta property="og:site_name" content="EloJob XCrONOS">
+        <meta property="og:description" content="Veja status dos seus pedidos da conta na EloJob XCrONOS.">
+        <meta property="og:image" content="https://www.elojobxcronos.com/assets/images/logoCronos.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://elojobxcronos.com/meus-pedidos">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,10 +58,10 @@ require_once '../model/Usuario.php';
 
 
 <body>
-    <header>
+<header>
         <div id="align-logoHambu">
             <a href="../index.php"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
-            <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
+            <span id="IconMenu" class="material-symbols-outlined">
                 menu
             </span>
         </div>
@@ -112,68 +128,47 @@ require_once '../model/Usuario.php';
         </div>
 
         <?php else : ?>
-            <form action="../service/AuthService.php" method="post">
-        <input type="hidden" name="type" value="login_index">
-        <button type="submit" class="login-btn" id="btnIniciar">
+        <a href="index.php" class="login-btn" id="btnIniciar">
             INICIAR SESSÃO
-        </button>
-    </form>
+        </a>
         <?php endif; ?>
-        
     </header>
+
     <main>
-        <div id="container-politica">
-            <h1>TERMOS DE USO - Elojob XCrONOS</h1>
-            <p>Bem-vindo à Elojob XCrONOS. Ao acessar e usar nosso site, você concorda com os seguintes termos de uso:</p>
+        <div id="container-editar">
+            <div id="align-user">
+                <img src="../assets/images/Usuario-fundobranco.png" alt="icone do usuario">
+                <div id="user">
+                <h2><?php echo htmlspecialchars($usuario->getNome());?></h2>
+                <p>Forjado na arena desde <b><?php echo $dataCadastroFormatada; ?></b></p>
+                </div>
+            </div>
+    <section>
+            <div id="menu-pedidos">
+            <h4>Meus Pedidos</h4>
+            <span>01</span>
+            </div>
+            <div class="numero-pedido">
+            <p>Pedido #13456 - 15/10/2024</p>
+            </div>
+            <div class="container-pedido">
+            <div class="fundo-preto">
+                <div class="align-info">
+                    <p>Serviço : Elojob</p>
+                    <p>Aguardando Pagamento</p>
+                </div>
+            </div>
 
-            <h4>1. Uso dos Serviços</h4>
-            <ul>
-                <li>
-                    Ao utilizar nossos serviços, você concorda em fornecer informações precisas e completas e em não utilizar o site para fins ilegais ou não autorizados.</li>
-            </ul>
-
-            <h4>2. Direitos de Propriedade Intelectual</h4>
-            <ul>
-                <li>Todo o conteúdo, incluindo textos, gráficos, logotipos, e ícones no site, é de propriedade da Elojob XCrONOS ou de seus licenciadores. Você não pode copiar, modificar, distribuir ou usar qualquer parte do conteúdo sem nossa permissão explícita.</li>
-            </ul>
-
-            <h4>3. Política de Pagamento e Reembolsos</h4>
-            <ul>
-                <li>Todos os pagamentos são processados com segurança e devem ser concluídos antes do início dos serviços. Não oferecemos reembolsos após o serviço ter sido iniciado, exceto em casos de falha comprovada do serviço.</li>
-
-            </ul>
-
-            <h4>4. Conta e Segurança</h4>
-            <ul>
-                <li>Você é responsável por manter a confidencialidade das informações da sua conta e por todas as atividades que ocorrem sob a sua conta. Notifique-nos imediatamente em caso de uso não autorizado da sua conta.</li>
-            </ul>
-
-            <h4>5.Limitação de Responsabilidade</h4>
-            <ul>
-                <li>A Elojob XCrONOS não se responsabiliza por danos diretos, indiretos, incidentais ou consequenciais resultantes do uso ou da incapacidade de usar nossos serviços.</li>
-            </ul>    
-            <h4>6.Isenção de Responsabilidade Relacionada à Riot Games</h4>
-            <ul>
-                <li>A Elojob XCrONOS não é afiliada, associada, endossada ou patrocinada pela Riot Games, Inc. ou por qualquer uma de suas subsidiárias. Todos os serviços oferecidos por nós são independentes e não possuem qualquer vínculo oficial com a Riot Games ou seus produtos, incluindo League of Legends.</li>
-            </ul>
-
-            <h4>7.Modificação nos Termos</h4>
-            <ul>
-                <li>Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações serão notificadas por meio do nosso site e entrarão em vigor imediatamente após a publicação.</li>
-            </ul>
-
-            <h4>8.Conformidade com a LGPD</h4>
-            <ul>
-                <li>Estamos em conformidade com a Lei Geral de Proteção de Dados (LGPD). Para mais detalhes, consulte nossa Política de Privacidade.</li>
-            </ul>
-
-            <h4>9.Contato</h4>
-            <ul>
-                <li>Para dúvidas ou questões sobre estes Termos de Uso, entre em contato conosco em seuemail@elojobxcronos.com</li>
-            </ul>
+            <div class="situacao">
+                <p>Seu pedido foi recebido! Aguardando a confirmação do pagamento para gerar o código de ativação. Assim que o pagamento for concluído, seu código estará disponível aqui para iniciar o serviço.</p>
+            </div>
         </div>
 
+
+    </section>
+    
     </main>
+
     <footer>
         <div class="container-footer">
             <div id="content-footer1">
@@ -216,6 +211,7 @@ require_once '../model/Usuario.php';
 
     <script src="../assets/js/global.js"></script>
     <script src="../assets/js/particles.min.js"></script>
+    <script src="../assets/js/alterar-dados.js"></script>
 
     
 

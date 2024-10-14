@@ -48,7 +48,7 @@ require_once '../model/Usuario.php';
 <body>
 <header>
         <div id="align-logoHambu">
-            <a href="../index.html"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
+            <a href="../index.php"><img src="../assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
             <span id="IconMenu" class="material-symbols-outlined" onclick="clickMenu()">
                 menu
             </span>
@@ -64,8 +64,8 @@ require_once '../model/Usuario.php';
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
-                    <li><a href="pages/eventos.html">Meus Pedidos</a></li>
-                    <li><a href="pages/alterar-dados.php">Alterar dados</a></li>
+                    <li><a href="meus-pedidos.php">Meus Pedidos</a></li>
+                    <li><a href="alterar-dados.php">Alterar dados</a></li>
                     <li>
                         <form action="../service/AuthService.php" method="post">
                             <input type="hidden" name="type" value="logout">
@@ -95,7 +95,7 @@ require_once '../model/Usuario.php';
             </p>
             <div class="align-itensUsuario">
                 <img src="../assets/images/carrinho.png" alt="icone carrinho de pedidos">
-                <a href="#">
+                <a href="meus-pedidos.php">
                     <p>Meus Pedidos</p>
                 </a>
             </div>
@@ -216,7 +216,7 @@ require_once '../model/Usuario.php';
                             <option value="Gladiador">Plano Gladiador</option>
                             <option value="Cronos">Plano Cronos</option>
                         </select>
-                        <div id="align-buttonPedido">
+                        <div id="align-buttonPedido">                    
                             <button>
                                 <img src="../assets/images/Whatsapp-icon.png" alt="icone whatsapp">
                                 COMPRAR

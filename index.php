@@ -195,7 +195,7 @@ if(isset($_GET['sucesso'])){
 <body>
     <header>
         <div id="align-logoHambu">
-            <a href="index.html"><img src="assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
+            <a href="#"><img src="assets/images/logoCronos.png" alt="Logo XCrONOS" class="logo"></a>
             <span id="IconMenu" class="material-symbols-outlined">
                 menu
             </span>
@@ -211,7 +211,7 @@ if(isset($_GET['sucesso'])){
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
-                    <li><a href="pages/alterar-dados.php">Meus Pedidos</a></li>
+                    <li><a href="pages/meus-pedidos.php">Meus Pedidos</a></li>
                     <li><a href="pages/alterar-dados.php">Alterar dados</a></li>
                     <li>
                         <form action="../elojob-backend/service/AuthService.php" method="post" style="display: inline;">
@@ -242,7 +242,7 @@ if(isset($_GET['sucesso'])){
             </p>
             <div class="align-itensUsuario">
                 <img src="assets/images/carrinho.png" alt="icone carrinho de pedidos">
-                <a href="pages/eventos.html">
+                <a href="pages/meus-pedidos.php">
                     <p>Meus Pedidos</p>
                 </a>
             </div>

@@ -254,6 +254,7 @@ main{
     width: 27px;
     padding-right: 5px;
     padding-left: 20px;
+    box-sizing: content-box;
 }
 
 

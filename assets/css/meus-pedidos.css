@@ -1,0 +1,102 @@
+main{
+    margin-top: 147px;
+    display: flex;
+    justify-content: center;
+
+}
+h4 {
+    color: white;
+    text-decoration: none;
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+}
+
+section{
+    background-color: #1D1C29;
+    /* max-width: 1000px; */
+    width: 1000px;
+    height: 431px;
+    text-align: center;
+    padding: 32px;
+    margin: auto 41px;
+    border-radius: 17px;
+}
+#align-user{
+    display: flex;
+    justify-content: center;
+    margin-top: 41px;
+    margin-bottom: 76px;
+    text-align: left;
+}
+#align-user img{
+    width: 104px;
+    height: 98px;
+}
+#user{
+    margin-left: 34px;
+}
+#user h2{
+    font-family: 'Poppins';
+    color: white;
+    margin-bottom: 0;
+    margin-top: 14px;
+}
+#user p{
+    margin-top: 3px;
+}
+#menu-pedidos{
+    display: flex;
+    margin-left: 35px;
+    margin-bottom: 31px;
+}
+.numero-pedido{
+    display: flex;
+    justify-content: center;
+}
+.numero-pedido p{
+    font-size: 20px;
+    width: 70%;
+    font-weight: 600;
+}
+span{
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    font-family: 'Poppins';
+    padding: 3px 5px;
+    margin-left: 8px;
+    border-radius: 7px;
+}
+.container-pedido{
+    display: ruby;
+}
+.fundo-preto{
+    background-color: black;
+    width: 70%;
+}
+.align-info{
+    display: flex;
+    justify-content: space-around;
+}
+.align-info p{
+    font-size: 20px;
+    font-weight: 600;
+}
+.align-info p:last-of-type {
+    color: #6D8E00;
+}
+.situacao{
+    background-color: white;
+    padding-top: 16px;
+    padding-bottom: 36px;
+    width: 70%;
+    margin-bottom: 38px;
+}
+.situacao p{
+    color: #6D8E00;
+    font-weight: 500;
+    margin: auto 44px;
+    text-align: start;
+}

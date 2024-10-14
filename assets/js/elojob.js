@@ -233,3 +233,22 @@ function enviarParaWhatsApp() {
 }
 
 document.querySelector('#pedido button').addEventListener('click', enviarParaWhatsApp);
+
+
+
+btnComprar.addEventListener('click', function() {
+    const ligaAtual = document.getElementById('liga').value;
+    const divisaoAtual = document.getElementById('divisao').value;
+    const ligaDesejada = document.getElementById('liga-desejada').value;
+    const divisaoDesejada = document.getElementById('divisao-desejada').value;
+    const planos = document.getElementById('planos').value;
+    
+    // Dados a serem enviados
+    const pedidoData = {
+        liga_atual: ligaAtual,
+        divisao_atual: divisaoAtual,
+        liga_desejada: ligaDesejada,
+        divisao_desejada: divisaoDesejada,
+        plano: planos
+    };
+});

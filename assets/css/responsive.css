@@ -104,7 +104,7 @@
 
 
 
-    /*------------------index.html----------------------------------*/
+    /*------------------index.php----------------------------------*/
 
     @media screen and (max-width: 1000px) {
        .vantagens {
@@ -141,7 +141,7 @@
     }
     }
 
-    /*------------------elojob.html----------------------------------*/
+    /*------------------elojob.php----------------------------------*/
     @media screen and (max-width: 1245px){
         #align-planos{
             background: none;
@@ -155,4 +155,12 @@
         }
     }
 
+    /*------------------meus-pedidos.php----------------------------------*/
 
+    @media screen and (max-width: 1100px){
+        section{
+            max-width: 1000px;
+            width: auto;
+            height: auto;
+        }
+    }
