@@ -114,6 +114,10 @@
 .email{
   margin-top: 2px;
   margin-bottom: 28px;
+  max-width: 100%; /* Limita a largura ao tamanho do contêiner pai */
+  overflow-wrap: break-word; /* Quebra o texto se for muito longo */
+  white-space: normal; /* Permite a quebra de linha no texto */
+  word-break: break-word; /* Quebra palavras longas se necessário */
 }
 .align-itensUsuario{
   display: flex;
