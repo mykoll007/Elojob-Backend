@@ -203,11 +203,11 @@ if(isset($_GET['sucesso'])){
         <nav id="itens">
             <ul>
                 <li><a href="#">INÍCIO</a></li>
-                <li><a href="pages/elojob.html">ELOJOB</a></li>
-                <li><a href="pages/duoboost.html">DUOBOOST</a></li>
-                <li><a href="pages/md5.html">MD5</a></li>
+                <li><a href="pages/elojob.php">ELOJOB</a></li>
+                <li><a href="pages/duoboost.php">DUOBOOST</a></li>
+                <li><a href="pages/md5.php">MD5</a></li>
                 <li><a href="pages/coach.php">COACH</a></li>
-                <li><a href="pages/eventos.html">EVENTOS</a></li>
+                <li><a href="pages/eventos.php">EVENTOS</a></li>
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
@@ -300,7 +300,7 @@ if(isset($_GET['sucesso'])){
         <!--Serviços-->
         <section id="container-cards">
 
-            <a href="pages/elojob.html">
+            <a href="pages/elojob.php">
                 <div id="card-elo" class="card">
                     <img src="assets/images/elojob.png" alt="Imagem serviço elojob">
                     <h2>ElO JOB</h2>
@@ -309,7 +309,7 @@ if(isset($_GET['sucesso'])){
                 </div>
             </a>
 
-            <a href="pages/duoboost.html">
+            <a href="pages/duoboost.php">
                 <div id="card-duo" class="card">
                     <img src="assets/images/duoboost.png" alt="Imagem serviço duoboost">
                     <h2>DUO BOOST</h2>
@@ -319,7 +319,7 @@ if(isset($_GET['sucesso'])){
                 </div>
             </a>
 
-            <a href="pages/md5.html">
+            <a href="pages/md5.php">
                 <div id="card-md5" class="card">
                     <img src="assets/images/md5.png" alt="Imagem serviço md5">
                     <h2>MD5</h2>
@@ -330,7 +330,7 @@ if(isset($_GET['sucesso'])){
                 </div>
             </a>
 
-            <a href="pages/coach.html">
+            <a href="pages/coach.php">
                 <div id="card-coach" class="card">
                     <img src="assets/images/coach.png" alt="Imagem serviço coach">
                     <h2>COACH</h2>
@@ -771,17 +771,17 @@ if(isset($_GET['sucesso'])){
                 </div>
             </div>
             <ul>
-                <li><a href="index.html">INICIO</a></li>
+                <li><a href="index.php">INICIO</a></li>
                 <li id="servicos"><a href="#container-jogos">SERVIÇOS</a></li>
                 <li><a href="https://wa.me/5511991983299?text=Olá%20preciso%20de%20ajuda%20vim%20pela%20ElojobXCronos."
                         target="_blank">CONTATO</a></li>
-                <li><a href="pages/termos-de-uso.html">TERMOS DE USO</a></li>
-                <li><a href="pages/politica-privacidade.html">POLITICAS DE PRIVACIDADES</a></li>
+                <li><a href="pages/termos-de-uso.php">TERMOS DE USO</a></li>
+                <li><a href="pages/politica-privacidade.php">POLITICAS DE PRIVACIDADES</a></li>
             </ul>
             <div id="formaspag">
                 <p>FORMAS DE PAGAMENTO</p>
                 <img src="assets/images/formas-pag.png" id="icone-forma" alt="icones de formas de pagamento">
-                <a href="https://transparencyreport.google.com/safe-browsing/search?hl=pt_BR" target="_blank"><img
+                <a href="https://transparencyreport.google.com/safe-browsing/search?url=https:%2F%2Fwww.elojobxcronos.com.br%2F" target="_blank"><img
                         src="assets/images/site-seguro.png" alt="icone de site seguro"></a>
             </div>
         </div>

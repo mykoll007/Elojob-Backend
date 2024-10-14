@@ -57,11 +57,11 @@ require_once '../model/Usuario.php';
         <nav id="itens">
             <ul>
                 <li><a href="../index.php">INÍCIO</a></li>
-                <li><a href="elojob.html">ELOJOB</a></li>
-                <li><a href="duoboost.html">DUOBOOST</a></li>
-                <li><a href="md5.html">MD5</a></li>
-                <li><a href="coach.html">COACH</a></li>
-                <li><a href="eventos.html">EVENTOS</a></li>
+                <li><a href="elojob.php">ELOJOB</a></li>
+                <li><a href="duoboost.php">DUOBOOST</a></li>
+                <li><a href="md5.php">MD5</a></li>
+                <li><a href="coach.php">COACH</a></li>
+                <li><a href="eventos.php">EVENTOS</a></li>
 
                 <?php if(isset($_SESSION['token'])) : ?>
                 <div class="itens-logado">
@@ -102,7 +102,7 @@ require_once '../model/Usuario.php';
             </div>
             <div class="align-itensUsuario">
                 <img src="../assets/images/Database.png" alt="icone carrinho de pedidos">
-                <a href="#">
+                <a href="alterar-dados.php">
                     <p>Alterar dados</p>
                 </a>
             </div>
@@ -242,18 +242,19 @@ require_once '../model/Usuario.php';
                 </div>
             </div>
             <ul>
-                <li><a href="../index.html">INICIO</a></li>
-                <li id="servicos"><a href="../index.html#container-jogos">SERVIÇOS</a></li>
+                <li><a href="../index.php">INICIO</a></li>
+                <li id="servicos"><a href="../index.php#container-jogos">SERVIÇOS</a></li>
                 <li><a href="https://wa.me/5511991983299?text=Olá%20preciso%20de%20ajuda%20vim%20pela%20ElojobXCronos."
                         target="_blank">CONTATO</a></li>
-                <li><a href="termos-de-uso.html">TERMOS DE USO</a></li>
-                <li><a href="politica-privacidade.html">POLITICAS DE PRIVACIDADES</a></li>
+                <li><a href="termos-de-uso.php">TERMOS DE USO</a></li>
+                <li><a href="politica-privacidade.php">POLITICAS DE PRIVACIDADES</a></li>
             </ul>
             <div id="formaspag">
                 <p>FORMAS DE PAGAMENTO</p>
                 <img src="../assets/images/formas-pag.png" id="icone-forma" alt="icones de formas de pagamento">
-                <a href="https://transparencyreport.google.com/safe-browsing/search?hl=pt_BR" target="_blank"><img
+                <a href="https://transparencyreport.google.com/safe-browsing/search?url=https:%2F%2Fwww.elojobxcronos.com.br%2F" target="_blank"><img
                         src="../assets/images/site-seguro.png" alt="icone de site seguro"></a>
+            </div>
             </div>
         </div>
         <div>
