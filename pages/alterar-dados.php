@@ -167,7 +167,7 @@ if(isset($_GET['sucesso'])){
         </div>
 
         <?php else : ?>
-        <a href="index.php" class="login-btn" id="btnIniciar" onclick="openModalIniciar()">
+        <a href="index.php" class="login-btn" id="btnIniciar">
             INICIAR SESSÃO
         </a>
         <?php endif; ?>

@@ -134,6 +134,19 @@ if (isset($_GET['sucesso'])) {
     }
 }
 
+if(isset($_GET['sucesso'])){
+    $sucesso = $_GET['sucesso'];
+
+    if($sucesso == 'iniciar_sessao'){
+        echo "<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        document.getElementById('modalIniciar').style.display = 'flex';
+        document.getElementById('modalIniciar').style.position = 'fixed';
+    });
+        </script>";
+    }
+}
+
 ?>
 
 
@@ -193,7 +206,7 @@ if (isset($_GET['sucesso'])) {
                 <li><a href="pages/elojob.html">ELOJOB</a></li>
                 <li><a href="pages/duoboost.html">DUOBOOST</a></li>
                 <li><a href="pages/md5.html">MD5</a></li>
-                <li><a href="pages/coach.html">COACH</a></li>
+                <li><a href="pages/coach.php">COACH</a></li>
                 <li><a href="pages/eventos.html">EVENTOS</a></li>
 
                 <?php if(isset($_SESSION['token'])) : ?>

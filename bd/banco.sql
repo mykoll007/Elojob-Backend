@@ -7,7 +7,7 @@ CREATE TABLE `bd_elojob`.`usuarios` (
   `nome` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `senha` VARCHAR(100) NOT NULL,
-  `telefone` VARCHAR(20) NOT NULL,
+  `telefone` VARCHAR(20) DEFAULT NULL,
   `token` VARCHAR(255) DEFAULT NULL,
   `data_cadastro` DATETIME NOT NULL,
   `codigo_verificacao` VARCHAR(6) DEFAULT NULL,

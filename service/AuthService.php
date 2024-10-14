@@ -35,6 +35,9 @@ switch($type)
     case "excluir_conta":
         handleExcluirConta();
         break;
+    case "login_index":
+        handleOpenLoginIndex();
+        break;
     default:
         echo "Ação inválida";
         break;
@@ -335,6 +338,11 @@ function handleExcluirConta() {
     }
 }
 
+//-------------------------Retornar para o index.php com o modal iniciar sessão----------
+function handleOpenLoginIndex(){
+    header("Location: ../index.php?sucesso=iniciar_sessao");
+    exit();
+}
 
 
 ?>
