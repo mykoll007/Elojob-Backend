@@ -9,3 +9,12 @@
         transform: translatey(0px); /* Retorna à posição inicial */
     }
 }
+
+@keyframes piscar {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}

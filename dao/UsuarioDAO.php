@@ -69,7 +69,6 @@ class UsuarioDAO{
     }
 
     public function getByToken($token) {
-        // Prepara a consulta SQL
         $sql = "SELECT * FROM usuarios WHERE token = :token LIMIT 1";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':token', $token);
@@ -88,7 +87,7 @@ class UsuarioDAO{
             );
         }
 
-        return null; // Retorna null se nenhum usuário foi encontrado
+        return null; 
     }
 
     public function updateCodigoVerificacao($idUsuario, $codigoVerificacao) {

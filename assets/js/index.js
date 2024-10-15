@@ -222,6 +222,26 @@ btnEsqueceuSenha.addEventListener('click', (event) => {
   openModalRecuperarSenha();
 });
 
+//Consentimento de cookies
+window.onload = function() {
+  const consentDate = localStorage.getItem('cookiesConsentDate');
+  const currentDate = new Date();
+
+  // 365 dias em milissegundos
+  const oneYear = 365 * 24 * 60 * 60 * 1000;
+
+  if (!localStorage.getItem('cookiesAccepted') || (consentDate && (currentDate - new Date(consentDate) > oneYear))) {
+      document.getElementById('cookie-consent').style.display = 'block';
+  }
+
+  document.getElementById('accept-cookies').onclick = function() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      localStorage.setItem('cookiesConsentDate', currentDate);
+      document.getElementById('cookie-consent').style.display = 'none';
+  };
+};
+
+
 
 
 
