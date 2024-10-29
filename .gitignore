@@ -1,0 +1,2 @@
+# Ignorar o arquivo EmailService.php dentro da pasta service
+service/EmailService.php
